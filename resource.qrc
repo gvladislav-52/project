@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>ui/tesla.png</file>
+        <file>ui/tesla2.png</file>
+        <file>ui/map.png</file>
+        <file>ui/button_70.png</file>
+        <file>ui/button_car.png</file>
+        <file>ui/button_more.png</file>
+        <file>ui/button_movie.png</file>
+        <file>ui/button_spotify.png</file>
+    </qresource>
+</RCC>
