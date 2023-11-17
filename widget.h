@@ -5,6 +5,10 @@
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QQuickWidget>
+#include <QVariant>
+#include <QtCore>
+#include <QtGui>
+#include <QtQuick>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
@@ -34,7 +38,9 @@ private:
     // Создание компоновщиков
     QVBoxLayout *mainLayout;
     QHBoxLayout *contentLayout;
-
+signals:
+    //void setCenterPosition(QVariant, QVariant);
+    //void setLocationMarking(QVariant, QVariant);
 };
 
 

@@ -16,7 +16,7 @@ void Widget::setWidget()
 {
     this->setWindowTitle("Ford APP");
     this->resize(1280,720);
-    this->setWindowFlags(Qt::Tool);
+    //this->setWindowFlags(Qt::Tool);
     setStyleSheet("background-color: black;");
     // Создание виджетов для каждой части
     headerWidget = new QWidget(this);
@@ -68,9 +68,15 @@ void Widget::LeftWidgetMain()
 void Widget::rightWidgetMain()
 {
     QQuickWidget *qwidget = new QQuickWidget(rightWidget);
-    qwidget->setSource(QUrl("qrc:/map.qml"));
+    qwidget->setSource(QUrl(QStringLiteral("qrc:/map.qml")));
     qwidget->setResizeMode(QQuickWidget::SizeRootObjectToView);
     QVBoxLayout * layoutImage = new QVBoxLayout(rightWidget);
+
+    //auto Obje = qwidget->rootContext();
+    //QObject::connect(this, SIGNAL(setCenterPosition(QVariant, QVariant)), Obje, SLOT(setCenterPosition(QVariant, QVariant)));
+    //QObject::connect(this, SIGNAL(setLocationMarking(QVariant, QVariant)), Obje, SLOT(setLocationMarking(QVariant, QVariant)));
+    //emit setCenterPosition(56.307706, 43.984085);
+    //emit setLocationMarking(56.307706, 43.984085);
     layoutImage->addWidget(qwidget);
     layoutImage->setContentsMargins(0, 0, 0, 0);
 }
