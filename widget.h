@@ -36,4 +36,6 @@ private:
     QHBoxLayout *contentLayout;
 
 };
+
+
 #endif // WIDGET_H

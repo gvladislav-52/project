@@ -6,7 +6,6 @@ Widget::Widget(QWidget *parent)
     , ui(new Ui::Widget)
 {
     ui->setupUi(this);
-    setWindowTitle("Ford APP");
     setWidget();
     LeftWidgetMain();
     rightWidgetMain();
@@ -15,12 +14,14 @@ Widget::Widget(QWidget *parent)
 
 void Widget::setWidget()
 {
+    this->setWindowTitle("Ford APP");
+    this->resize(1280,720);
     this->setWindowFlags(Qt::Tool);
     setStyleSheet("background-color: black;");
     // Создание виджетов для каждой части
     headerWidget = new QWidget(this);
     mainContentWidget = new QWidget(this);
-    leftWidget = new QWidget(this);
+    leftWidget = new QWidget(mainContentWidget);
     rightWidget = new QWidget(mainContentWidget);
     basementWidget = new QWidget(this);
 
@@ -66,17 +67,12 @@ void Widget::LeftWidgetMain()
 
 void Widget::rightWidgetMain()
 {
-
-    QQuickWidget * qwidget = new QQuickWidget(rightWidget);
-    //QLabel *imageWidget = new QLabel(rightWidget);
-
-    // Загружаем изображение
-    //QPixmap pixmap(":/ui/map.png");
+    QQuickWidget *qwidget = new QQuickWidget(rightWidget);
+    qwidget->setSource(QUrl("qrc:/map.qml"));
+    qwidget->setResizeMode(QQuickWidget::SizeRootObjectToView);
     QVBoxLayout * layoutImage = new QVBoxLayout(rightWidget);
     layoutImage->addWidget(qwidget);
-    // Устанавливаем изображение и масштабируем его по размеру виджета
-    //imageWidget->setPixmap(pixmap);
-    //imageWidget->setScaledContents(true);
+    layoutImage->setContentsMargins(0, 0, 0, 0);
 }
 
 void Widget::basementWidgetMain()
