@@ -9,5 +9,6 @@
         <file>ui/button_movie.png</file>
         <file>ui/button_spotify.png</file>
         <file>map.qml</file>
+        <file>ui/ford.jpg</file>
     </qresource>
 </RCC>

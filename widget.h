@@ -1,17 +1,23 @@
 #ifndef WIDGET_H
 #define WIDGET_H
 
-#include <QWidget>
-#include <QVBoxLayout>
 #include <QLabel>
 #include <QQuickWidget>
+#include <QVBoxLayout>
 #include <QVariant>
+#include <QWidget>
 #include <QtCore>
 #include <QtGui>
 #include <QtQuick>
+#include "leftwidget.h"
+#include "rightwidget.h"
+#include "basementwidget.h"
+#include "headerwidget.h"
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class Widget; }
+namespace Ui {
+class Widget;
+}
 QT_END_NAMESPACE
 
 class Widget : public QWidget
@@ -25,23 +31,17 @@ public:
 private:
     Ui::Widget *ui;
     void setWidget();
-    void LeftWidgetMain();
-        void rightWidgetMain();
-    void basementWidgetMain();
+    LeftWidget *leftWidgetMain;
+    RightWidget *rightWidgetMain;
+    basementwidget *basementWidgetMain;
+    headerwidget *headerWidgetMain;
+
     // Создание виджетов для каждой части
     QWidget *mainContentWidget;
-    QWidget *headerWidget;
-    QWidget *leftWidget;
-    QWidget *rightWidget;
-    QWidget *basementWidget;
 
     // Создание компоновщиков
     QVBoxLayout *mainLayout;
     QHBoxLayout *contentLayout;
-signals:
-    //void setCenterPosition(QVariant, QVariant);
-    //void setLocationMarking(QVariant, QVariant);
 };
-
 
 #endif // WIDGET_H
