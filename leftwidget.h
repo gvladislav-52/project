@@ -5,6 +5,10 @@
 #include <QLabel>
 #include <QPixmap>
 #include <QVBoxLayout>
+#include <QPushButton>
+#include <QStackedLayout>
+#include <QToolButton>
+#include <QSpacerItem>
 
 class LeftWidget : public QWidget
 {
@@ -16,6 +20,7 @@ public:
 private:
     QLabel *imageWidget;
     QVBoxLayout *layoutImage;
+    QPushButton *button;
 };
 
 #endif // LEFTWIDGET_H

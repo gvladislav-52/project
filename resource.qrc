@@ -10,5 +10,7 @@
         <file>ui/button_spotify.png</file>
         <file>map.qml</file>
         <file>ui/ford.jpg</file>
+        <file>ui/carUP.png</file>
+        <file>ui/CarUpNew.png</file>
     </qresource>
 </RCC>

@@ -13,7 +13,7 @@ void Widget::setWidget()
 {
     this->setWindowTitle("Ford APP");
     this->resize(1280, 720);
-    setStyleSheet("background-color: black;");
+    this->setStyleSheet("background-color: black;");
 
     // Создание виджетов для каждой части
     headerWidgetMain = new headerwidget(this);
