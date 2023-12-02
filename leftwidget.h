@@ -1,14 +1,9 @@
 #ifndef LEFTWIDGET_H
 #define LEFTWIDGET_H
 
-#include <QWidget>
-#include <QLabel>
-#include <QPixmap>
+#include <QQuickWidget>
 #include <QVBoxLayout>
-#include <QPushButton>
-#include <QStackedLayout>
-#include <QToolButton>
-#include <QSpacerItem>
+#include <QtQuick>
 
 class LeftWidget : public QWidget
 {
@@ -18,9 +13,7 @@ public:
     explicit LeftWidget(QWidget *parent = nullptr);
 
 private:
-    QLabel *imageWidget;
+    QQuickWidget *qwidget;
     QVBoxLayout *layoutImage;
-    QPushButton *button;
 };
-
 #endif // LEFTWIDGET_H

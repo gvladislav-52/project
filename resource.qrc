@@ -12,5 +12,7 @@
         <file>ui/ford.jpg</file>
         <file>ui/carUP.png</file>
         <file>ui/CarUpNew.png</file>
+        <file>ui/carUp1.png</file>
+        <file>imageLeft.qml</file>
     </qresource>
 </RCC>
