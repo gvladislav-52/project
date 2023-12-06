@@ -1,70 +1,143 @@
+// Copyright (C) 2017 The Qt Company Ltd.
+// SPDX-License-Identifier: LicenseRef-Qt-Commercial OR BSD-3-Clause
+
+//! [Imports]
 import QtQuick
-import QtLocation
 import QtPositioning
+import QtLocation
+import QtQuick.Controls
+
+//! [Imports]
 
 Rectangle {
-    id: rightScreen
+    anchors.fill: parent
 
-    anchors {
-        top: parent.top
-        bottom: bottomBar.top
-        right: parent.right
-    }
-    property Component locationmarker: locmaker
+    //! [Initialize Plugin]
     Plugin {
-            id: mapPlugin
-            name: "osm"
-        }
+        id: myPlugin
+        name: "osm"
+        //specify plugin parameters if necessary
+        //PluginParameter {...}
+        //PluginParameter {...}
+        //...
+    }
+    //! [Initialize Plugin]
 
-        Map {
-            id: map
-            anchors.fill: parent
-            plugin: mapPlugin
-            center: QtPositioning.coordinate(56.307706, 43.984085) // Oslo
-            zoomLevel: 18
-            property geoCoordinate startCentroid
-
-            PinchHandler {
-                id: pinch
-                target: null
-                onActiveChanged: if (active) {
-                    map.startCentroid = map.toCoordinate(pinch.centroid.position, false)
-                }
-                onScaleChanged: (delta) => {
-                    map.zoomLevel += Math.log2(delta)
-                    map.alignCoordinateToPoint(map.startCentroid, pinch.centroid.position)
-                }
-                onRotationChanged: (delta) => {
-                    map.bearing -= delta
-                    map.alignCoordinateToPoint(map.startCentroid, pinch.centroid.position)
-                }
-                grabPermissions: PointerHandler.TakeOverForbidden
-            }
-            WheelHandler {
-                id: wheel
-                // workaround for QTBUG-87646 / QTBUG-112394 / QTBUG-112432:
-                // Magic Mouse pretends to be a trackpad but doesn't work with PinchHandler
-                // and we don't yet distinguish mice and trackpads on Wayland either
-                acceptedDevices: Qt.platform.pluginName === "cocoa" || Qt.platform.pluginName === "wayland"
-                                 ? PointerDevice.Mouse | PointerDevice.TouchPad
-                                 : PointerDevice.Mouse
-                rotationScale: 1/120
-                property: "zoomLevel"
-            }
-            DragHandler {
-                id: drag
-                target: null
-                onTranslationChanged: (delta) => map.pan(-delta.x, -delta.y)
-            }
-            Shortcut {
-                enabled: map.zoomLevel < map.maximumZoomLevel
-                sequence: StandardKey.ZoomIn
-                onActivated: map.zoomLevel = Math.round(map.zoomLevel + 1)
-            }
-            Shortcut {
-                enabled: map.zoomLevel > map.minimumZoomLevel
-                sequence: StandardKey.ZoomOut
-                onActivated: map.zoomLevel = Math.round(map.zoomLevel - 1)
+    //! [Current Location]
+    PositionSource {
+        id: positionSource
+        property variant lastSearchPosition: QtPositioning.coordinate(56.307706, 43.984085) //Initialized/Fallback to Oslo
+        active: true
+        updateInterval: 120000 // 2 mins
+        onPositionChanged:  {
+            var distance = lastSearchPosition.distanceTo(position.coordinate)
+            if (distance > 500) {
+                // 500m from last performed food search
+                lastSearchPosition = positionSource.position.coordinate
             }
         }
+    }
+    //! [Current Location]
+
+    //! [PlaceSearchModel]
+    PlaceSearchModel {
+        id: searchModel
+
+        plugin: myPlugin
+
+        searchTerm: "school"
+        searchArea:  QtPositioning.circle(positionSource.lastSearchPosition, 1000 /* 1 km radius */)
+        Component.onCompleted: update()
+    }
+    //! [PlaceSearchModel]
+
+    //! [Places MapItemView]
+    MapView {
+        id: view
+        anchors.fill: parent
+        map.plugin: myPlugin;
+        map.center: positionSource.lastSearchPosition
+        map.zoomLevel: 13
+
+        MapItemView {
+            model: searchModel
+            parent: view.map
+            delegate: MapQuickItem {
+                coordinate: place.location.coordinate
+
+                anchorPoint.x: image.width * 0.5
+                anchorPoint.y: image.height
+
+                sourceItem: Column {
+                    Image { id: image; source: "qrc:/ui/marker.png" }
+                    Text { text: title; font.bold: true }
+                }
+            }
+        }
+    }
+    //! [Places MapItemView]
+
+    Connections {
+        target: searchModel
+        function onStatusChanged() {
+            if (searchModel.status == PlaceSearchModel.Error)
+                console.log(searchModel.errorString());
+        }
+    }
+
+    RoundButton {
+        //text: "-"
+        id: zoomOutButton
+        width: 60
+        height: 60
+        anchors {
+            right: parent.right
+            top: parent.verticalCenter
+        }
+        onClicked: {
+            view.map.zoomLevel -= 1; // Уменьшение уровня масштабирования на 1
+        }
+        icon.source: "qrc:/ui/minus.png"
+    }
+
+    RoundButton {
+        //text: "+"
+        id: zoomInButton
+        width: 60
+        height: 60
+        anchors {
+            right: parent.right
+            bottom: parent.verticalCenter
+        }
+        onClicked: {
+            view.map.zoomLevel += 1; // Увеличение уровня масштабирования на 1
+        }
+        icon.source: "qrc:/ui/plus.png"
+    }
+
+    Row {
+        id: zoomLevelLayout
+        anchors {
+            right: parent.right
+            bottom: parent.bottom
+            margins: 10
+        }
+
+        Image {
+            source: "qrc:/ui/leans.png"
+            width: 30
+            height: 30
+        }
+
+        Text {
+            id: zoomLevelText
+            text: " " + Math.floor(view.map.zoomLevel)
+            color: "black"
+            font.bold: true
+            font.pixelSize: 20
+            //leftMargin: 5
+        }
+    }
+    MusicWidget {}
+    SelectorWidget {}
 }

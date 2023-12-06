@@ -13,6 +13,7 @@ public:
     explicit LeftWidget(QWidget *parent = nullptr);
 
 private:
+    void carButton();
     QQuickWidget *qwidget;
     QVBoxLayout *layoutImage;
 };

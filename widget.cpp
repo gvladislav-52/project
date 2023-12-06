@@ -35,7 +35,7 @@ void Widget::setWidget()
     contentLayout->setSpacing(0);
 
     // Размещение виджетов в компоновщиках
-    mainLayout->addWidget(headerWidgetMain, 1);
+    //mainLayout->addWidget(headerWidgetMain, 1);
     mainLayout->addWidget(mainContentWidget, 15);
     mainLayout->addWidget(basementWidgetMain, 2);
 

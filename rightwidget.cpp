@@ -10,3 +10,4 @@ RightWidget::RightWidget(QWidget *parent) : QWidget(parent)
     layoutImage->addWidget(qwidget);
     layoutImage->setContentsMargins(0, 0, 0, 0);
 }
+

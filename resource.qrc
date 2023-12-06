@@ -14,5 +14,12 @@
         <file>ui/CarUpNew.png</file>
         <file>ui/carUp1.png</file>
         <file>imageLeft.qml</file>
+        <file>ui/marker.png</file>
+        <file>ui/minus.png</file>
+        <file>ui/plus.png</file>
+        <file>ui/plus2.png</file>
+        <file>ui/leans.png</file>
+        <file>MusicWidget.qml</file>
+        <file>SelectorWidget.qml</file>
     </qresource>
 </RCC>
