@@ -11,7 +11,7 @@ Widget::Widget(QWidget *parent)
 
 void Widget::setWidget()
 {
-    this->setWindowTitle("Ford APP");
+    this->setWindowTitle("Tesla Application");
     this->resize(1280, 720);
     this->setStyleSheet("background-color: white;");
     // Создание виджетов для каждой части
@@ -40,7 +40,7 @@ void Widget::setWidget()
 
     contentLayout->addWidget(leftWidgetMain, 2);
     leftWidgetMain->setMaximumHeight(1080);
-    leftWidgetMain->setMaximumWidth(400);
+    leftWidgetMain->setMaximumWidth(500);
     contentLayout->addWidget(rightWidgetMain, 5);
 }
 

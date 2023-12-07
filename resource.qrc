@@ -25,5 +25,6 @@
         <file>carSelectWidget.qml</file>
         <file>ui/thunder.png</file>
         <file>ui/carUp2.png</file>
+        <file>ui/battery.png</file>
     </qresource>
 </RCC>

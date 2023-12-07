@@ -12,6 +12,7 @@ LeftWidget::LeftWidget(QWidget *parent) : QWidget(parent)
 void LeftWidget::carButton(QVBoxLayout *mainLayout)
 {
     widget = new QQuickWidget(this);
+    //widget->setStyleSheet("background-color: white;");
     widget->setSource(QUrl(QStringLiteral("qrc:/imageLeft.qml")));
     widget->setResizeMode(QQuickWidget::SizeRootObjectToView);
 
@@ -35,8 +36,8 @@ void LeftWidget::carCharger(QVBoxLayout *mainLayout)
 {
     widget = new QQuickWidget(this);
     widget->setSource(QUrl(QStringLiteral("qrc:/carChargerWidget.qml")));
-    //widget->setResizeMode(QQuickWidget::SizeRootObjectToView);
-    mainLayout->addWidget(widget, 1); // Установка соотношения размеров
+    widget->setResizeMode(QQuickWidget::SizeRootObjectToView);
+    mainLayout->addWidget(widget, 2); // Установка соотношения размеров
 }
 
 void LeftWidget::carSelect(QVBoxLayout *mainLayout)
