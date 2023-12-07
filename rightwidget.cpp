@@ -3,7 +3,7 @@
 RightWidget::RightWidget(QWidget *parent) : QWidget(parent)
 {
     qwidget = new QQuickWidget(this);
-    qwidget->setSource(QUrl(QStringLiteral("qrc:/map.qml")));
+    qwidget->setSource(QUrl(QStringLiteral("qrc:/MainRightWidget.qml")));
     qwidget->setResizeMode(QQuickWidget::SizeRootObjectToView);
     layoutImage = new QVBoxLayout(this);
 

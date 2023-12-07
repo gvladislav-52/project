@@ -138,6 +138,4 @@ Rectangle {
             //leftMargin: 5
         }
     }
-    MusicWidget {}
-    SelectorWidget {}
 }

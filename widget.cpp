@@ -13,7 +13,7 @@ void Widget::setWidget()
 {
     this->setWindowTitle("Tesla Application");
     this->resize(1280, 720);
-    this->setStyleSheet("background-color: white;");
+    this->setStyleSheet("background-color: black;");
     // Создание виджетов для каждой части
     headerWidgetMain = new headerwidget(this);
     mainContentWidget = new QWidget(this);
@@ -42,6 +42,9 @@ void Widget::setWidget()
     leftWidgetMain->setMaximumHeight(1080);
     leftWidgetMain->setMaximumWidth(500);
     contentLayout->addWidget(rightWidgetMain, 5);
+    // Установка стилей для левого виджета
+
+    mainContentWidget->setStyleSheet("background-color: white;");
 }
 
 Widget::~Widget()

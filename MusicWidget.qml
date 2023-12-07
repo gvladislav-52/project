@@ -7,4 +7,5 @@ Rectangle {
     anchors.horizontalCenter: parent.horizontalCenter // Размещаем квадрат по горизонтальному центру родительского элемента
     anchors.bottom: parent.bottom // Размещаем квадрат внизу родительского элемента
     anchors.bottomMargin: 5 // Добавляем отступ снизу в 5 пикселей
+    opacity: 0.95
 }

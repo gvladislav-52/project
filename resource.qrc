@@ -8,7 +8,7 @@
         <file>ui/button_more.png</file>
         <file>ui/button_movie.png</file>
         <file>ui/button_spotify.png</file>
-        <file>map.qml</file>
+        <file>MapWidget.qml</file>
         <file>ui/ford.jpg</file>
         <file>ui/carUP.png</file>
         <file>ui/CarUpNew.png</file>
@@ -26,5 +26,10 @@
         <file>ui/thunder.png</file>
         <file>ui/carUp2.png</file>
         <file>ui/battery.png</file>
+        <file>MainRightWidget.qml</file>
+        <file>ui/charge.png</file>
+        <file>ui/music.png</file>
+        <file>ui/speed.png</file>
+        <file>ui/P.png</file>
     </qresource>
 </RCC>
