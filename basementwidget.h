@@ -13,6 +13,7 @@ public:
     explicit basementwidget(QWidget *parent = nullptr);
 
 private:
+    void basementCreate();
     QLabel *imageWidget;
 };
 

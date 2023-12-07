@@ -4,6 +4,7 @@
 #include <QQuickWidget>
 #include <QVBoxLayout>
 #include <QtQuick>
+#include <QLabel>
 
 class LeftWidget : public QWidget
 {
@@ -13,8 +14,10 @@ public:
     explicit LeftWidget(QWidget *parent = nullptr);
 
 private:
-    void carButton();
-    QQuickWidget *qwidget;
-    QVBoxLayout *layoutImage;
+    void carButton(QVBoxLayout *mainLayout);
+    void carCharger(QVBoxLayout *mainLayout);
+    void carSelect(QVBoxLayout *mainLayout);
+    QQuickWidget *widget;
+    QVBoxLayout *mainLayout;
 };
 #endif // LEFTWIDGET_H

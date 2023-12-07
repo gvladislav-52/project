@@ -2,6 +2,11 @@
 
 basementwidget::basementwidget(QWidget *parent) : QWidget(parent)
 {
+    basementCreate();
+}
+
+void basementwidget::basementCreate()
+{
     imageWidget = new QLabel(this);
 
     // Загружаем изображение

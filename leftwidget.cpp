@@ -2,25 +2,47 @@
 
 LeftWidget::LeftWidget(QWidget *parent) : QWidget(parent)
 {
-    carButton();
+    mainLayout = new QVBoxLayout(this);
+    carCharger(mainLayout);
+    carButton(mainLayout);
+    carSelect(mainLayout);
+    mainLayout->setContentsMargins(0, 0, 0, 0);
 }
 
-void LeftWidget::carButton()
+void LeftWidget::carButton(QVBoxLayout *mainLayout)
 {
-    QVBoxLayout *mainLayout = new QVBoxLayout(this);
+    widget = new QQuickWidget(this);
+    widget->setSource(QUrl(QStringLiteral("qrc:/imageLeft.qml")));
+    widget->setResizeMode(QQuickWidget::SizeRootObjectToView);
 
-    QQuickWidget *widget1 = new QQuickWidget(this);
-    widget1->setMinimumHeight(100); // Установка минимальной высоты виджета
-    mainLayout->addWidget(widget1, 1); // Установка соотношения размеров
+    QSpacerItem *spacerTop = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    QSpacerItem *spacerBottom = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    QSpacerItem *spacerLeft = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum);
+    QSpacerItem *spacerRight = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-    QQuickWidget *widget2 = new QQuickWidget(this);
-    widget2->setSource(QUrl(QStringLiteral("qrc:/imageLeft.qml")));
-    widget2->setResizeMode(QQuickWidget::SizeRootObjectToView);
-    mainLayout->addWidget(widget2, 6); // Установка соотношения размеров
+    mainLayout->addItem(spacerTop);
+    mainLayout->addItem(spacerLeft);
+    mainLayout->addItem(spacerRight);
 
-    QQuickWidget *widget3 = new QQuickWidget(this);
-    widget3->setMinimumHeight(150); // Установка минимальной высоты виджета
-    mainLayout->addWidget(widget3, 2); // Установка соотношения размеров
+    // Установка соотношения размеров
+    int width = 6;
+    int height = width * 2;
+    mainLayout->addWidget(widget, height, Qt::AlignCenter);
+    mainLayout->addItem(spacerBottom);
+}
 
-    mainLayout->setContentsMargins(0, 0, 0, 0);
+void LeftWidget::carCharger(QVBoxLayout *mainLayout)
+{
+    widget = new QQuickWidget(this);
+    widget->setSource(QUrl(QStringLiteral("qrc:/carChargerWidget.qml")));
+    //widget->setResizeMode(QQuickWidget::SizeRootObjectToView);
+    mainLayout->addWidget(widget, 1); // Установка соотношения размеров
+}
+
+void LeftWidget::carSelect(QVBoxLayout *mainLayout)
+{
+    widget = new QQuickWidget(this);
+    widget->setSource(QUrl(QStringLiteral("qrc:/carSelectWidget.qml")));
+    widget->setResizeMode(QQuickWidget::SizeRootObjectToView);
+    mainLayout->addWidget(widget, 2); // Установка соотношения размеров
 }

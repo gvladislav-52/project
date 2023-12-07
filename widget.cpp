@@ -13,8 +13,7 @@ void Widget::setWidget()
 {
     this->setWindowTitle("Ford APP");
     this->resize(1280, 720);
-    this->setStyleSheet("background-color: black;");
-
+    this->setStyleSheet("background-color: white;");
     // Создание виджетов для каждой части
     headerWidgetMain = new headerwidget(this);
     mainContentWidget = new QWidget(this);
@@ -40,6 +39,8 @@ void Widget::setWidget()
     mainLayout->addWidget(basementWidgetMain, 2);
 
     contentLayout->addWidget(leftWidgetMain, 2);
+    leftWidgetMain->setMaximumHeight(1080);
+    leftWidgetMain->setMaximumWidth(400);
     contentLayout->addWidget(rightWidgetMain, 5);
 }
 

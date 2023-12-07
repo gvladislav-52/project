@@ -21,5 +21,9 @@
         <file>ui/leans.png</file>
         <file>MusicWidget.qml</file>
         <file>SelectorWidget.qml</file>
+        <file>carChargerWidget.qml</file>
+        <file>carSelectWidget.qml</file>
+        <file>ui/thunder.png</file>
+        <file>ui/carUp2.png</file>
     </qresource>
 </RCC>

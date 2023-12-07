@@ -2,11 +2,11 @@ import QtQuick 2.0
 import QtQuick.Controls 2.0
 
 Item {
-    width: 400
-    height: 400
+    width: 350
+    height: 516
 
     Image {
-        source: "qrc:/ui/carUp1.png" // путь к вашей картинке
+        source: "qrc:/ui/carUp2.png" // путь к вашей картинке
         anchors.fill: parent // растягиваем картинку на всю доступную площадь
     }
 
