@@ -13,7 +13,6 @@
         <file>ui/carUP.png</file>
         <file>ui/CarUpNew.png</file>
         <file>ui/carUp1.png</file>
-        <file>imageLeft.qml</file>
         <file>ui/marker.png</file>
         <file>ui/minus.png</file>
         <file>ui/plus.png</file>
@@ -21,8 +20,6 @@
         <file>ui/leans.png</file>
         <file>MusicWidget.qml</file>
         <file>SelectorWidget.qml</file>
-        <file>carChargerWidget.qml</file>
-        <file>carSelectWidget.qml</file>
         <file>ui/thunder.png</file>
         <file>ui/carUp2.png</file>
         <file>ui/battery.png</file>
@@ -31,5 +28,10 @@
         <file>ui/music.png</file>
         <file>ui/speed.png</file>
         <file>ui/P.png</file>
+        <file>MainQML.qml</file>
+        <file>MainLeftWidget.qml</file>
+        <file>LeftCharge.qml</file>
+        <file>LeftImage.qml</file>
+        <file>LeftSelect.qml</file>
     </qresource>
 </RCC>

@@ -14,22 +14,16 @@
 #include "basementwidget.h"
 #include "headerwidget.h"
 
-QT_BEGIN_NAMESPACE
-namespace Ui {
-class Widget;
-}
-QT_END_NAMESPACE
-
-class Widget : public QWidget
+class SomeClass : public QObject
 {
     Q_OBJECT
 
 public:
-    Widget(QWidget *parent = nullptr);
-    ~Widget();
+    SomeClass(QObject *parent = nullptr);
+    QUrl getUrl();
+    QString getStr();
 
 private:
-    Ui::Widget *ui;
     void setWidget();
     LeftWidget *leftWidgetMain;
     RightWidget *rightWidgetMain;

@@ -9,7 +9,8 @@ import QtQuick.Controls
 
 //! [Imports]
 
-Rectangle {
+Item {
+    visible: true
     anchors.fill: parent
 
     //! [Initialize Plugin]
@@ -93,6 +94,8 @@ Rectangle {
         anchors {
             right: parent.right
             top: parent.verticalCenter
+            rightMargin: 10
+            topMargin: 2
         }
         onClicked: {
             view.map.zoomLevel -= 1; // Уменьшение уровня масштабирования на 1
@@ -108,6 +111,8 @@ Rectangle {
         anchors {
             right: parent.right
             bottom: parent.verticalCenter
+            rightMargin: 10
+            bottomMargin: 2
         }
         onClicked: {
             view.map.zoomLevel += 1; // Увеличение уровня масштабирования на 1

@@ -11,3 +11,10 @@ RightWidget::RightWidget(QWidget *parent) : QWidget(parent)
     layoutImage->setContentsMargins(0, 0, 0, 0);
 }
 
+QUrl RightWidget::getUrl()
+{
+    QUrl url(QStringLiteral("qrc:/MainQML.qml"));
+    return url;
+}
+
+

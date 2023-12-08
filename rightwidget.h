@@ -11,7 +11,7 @@ class RightWidget : public QWidget
 
 public:
     explicit RightWidget(QWidget *parent = nullptr);
-
+    QUrl getUrl();
 private:
     QQuickWidget *qwidget;
     QVBoxLayout *layoutImage;

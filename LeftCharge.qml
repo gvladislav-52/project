@@ -33,16 +33,16 @@ Rectangle {
         anchors.bottom: parent.bottom
     }
 
-    // Text {
-    //     text: qsTr("100%")
-    //     color: "black"
-    //     font.bold: true
-    //     font.pixelSize: parent.width * 0.04
-    //     anchors.right: battery.right
-    //     anchors.bottom: parent.bottom
-    //     anchors.rightMargin: 5
-    //     anchors.bottomMargin: 10
-    // }
+    Text {
+        id: redittext
+        text:  qsTr("100") // model.textValue - это свойство, которое вы установите из C++ кода
+        color: "black"
+        font.bold: true
+        font.pixelSize: parent.width * 0.04
+        anchors.right: battery.left // Изменён анкер - теперь текст размещается слева от изображения
+        anchors.verticalCenter: battery.verticalCenter // Чтобы текст и изображение были выровнены по вертикали
+        anchors.rightMargin: 5
+    }
 
     Text {
         text: qsTr("Charging Complete:")
@@ -52,7 +52,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.bottom: parent.bottom
         anchors.leftMargin: 5
-        anchors.bottomMargin: 10
+        anchors.bottomMargin: 12
     }
 }
 

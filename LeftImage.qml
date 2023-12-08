@@ -2,12 +2,13 @@ import QtQuick 2.0
 import QtQuick.Controls 2.0
 
 Item {
-    width: 350
-    height: 516
+    width: 200
+    height: 616
 
     Image {
         source: "qrc:/ui/carUp2.png" // путь к вашей картинке
         anchors.fill: parent // растягиваем картинку на всю доступную площадь
+        fillMode: Image.PreserveAspectFit // сохраняем пропорции картинки и подгоняем ее внутри элемента
     }
 
     Button
@@ -76,5 +77,3 @@ Item {
         opacity: 0.5 // кнопка полностью прозрачна
     }
 }
-
-
