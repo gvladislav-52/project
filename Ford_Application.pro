@@ -9,22 +9,15 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    basementwidget.cpp \
-    headerwidget.cpp \
-    leftwidget.cpp \
+    leftsource.cpp \
     main.cpp \
-    rightwidget.cpp \
-    widget.cpp
+    mainsource.cpp
 
 HEADERS += \
-    basementwidget.h \
-    headerwidget.h \
-    leftwidget.h \
-    rightwidget.h \
-    widget.h
+    leftsource.h \
+    mainsource.h
 
-FORMS += \
-    widget.ui
+FORMS +=
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

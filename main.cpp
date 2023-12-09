@@ -1,4 +1,4 @@
-#include "widget.h"
+#include "mainsource.h"
 
 #include <QApplication>
 
@@ -18,12 +18,12 @@ int main(int argc, char *argv[])
 #endif
     QGuiApplication app (argc, argv);
 
-    SomeClass w;
-    QUrl a = w.getUrl();
+    MainSource window;
+    QUrl a = window.getUrl();
     QQmlApplicationEngine engine;
     Function_lol(engine,app,a);
     engine.load(a);
     QQmlContext*rootContext = engine.rootContext();
-    rootContext->setContextProperty("classA",&w);
+    rootContext->setContextProperty("mainClass",&window);
     return app.exec();
 }

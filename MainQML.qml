@@ -11,6 +11,9 @@ Window {
     RowLayout {
         anchors.fill: parent
 
+        // Loader {
+        //     source: "qrc:/123.qml"
+        // }
         MainLeftWidget {
             Layout.fillHeight: true
             //Layout.fillWidth: true
@@ -23,4 +26,11 @@ Window {
             Layout.preferredWidth: parent.width * 0.7
         }
     }
+
+    // Loader {
+    //     source: "qrc:/MainLeftWidget.qml"
+    //     Layout.fillHeight: true
+    //     //Layout.fillWidth: true
+    //     Layout.preferredWidth: parent.width * 0.3
+    // }
 }

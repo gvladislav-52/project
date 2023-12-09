@@ -10,5 +10,16 @@ Item {
         height: 125
         color: "white"
         opacity: 0.95
+
+        Text {
+            id: redittext
+            text:  mainClass.currentTime // model.textValue - это свойство, которое вы установите из C++ кода
+            color: "black"
+            font.bold: true
+            font.pixelSize: parent.width * 0.04
+            //anchors.right: battery.left // Изменён анкер - теперь текст размещается слева от изображения
+            anchors.verticalCenter: battery.verticalCenter // Чтобы текст и изображение были выровнены по вертикали
+            anchors.rightMargin: 5
+        }
     }
 }
