@@ -1,15 +1,8 @@
-#include "mainsource.h"
-
+#include "leftsourcefile.h"
+#include "rightsourcefile.h"
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
 #include <QApplication>
-
-void Function_lol(QQmlApplicationEngine &engine, QGuiApplication &app, QUrl a)
-{
-    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated, &app, [a](QObject *obj, const QUrl &objUrl)
-        {
-            if(!obj && a == objUrl)
-                QCoreApplication::exit(-1);
-        },Qt::QueuedConnection);
-}
 
 int main(int argc, char *argv[])
 {
@@ -18,12 +11,19 @@ int main(int argc, char *argv[])
 #endif
     QGuiApplication app (argc, argv);
 
-    MainSource window;
-    QUrl a = window.getUrl();
+    LeftSourceFile leftSource;
+    RightSourceFile rightSource;
     QQmlApplicationEngine engine;
-    Function_lol(engine,app,a);
-    engine.load(a);
+    const QUrl url (QStringLiteral("qrc:/MainQML.qml"));
+    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated, &app, [url](QObject *obj, const QUrl &objUrl)
+        {
+            if(!obj && url == objUrl)
+                QCoreApplication::exit(-1);
+        },Qt::QueuedConnection);
+
+    engine.load(url);
     QQmlContext*rootContext = engine.rootContext();
-    rootContext->setContextProperty("mainClass",&window);
+    //rootContext->setContextProperty("leftClass",&leftSource);
+    rootContext->setContextProperty("rightClass",&rightSource);
     return app.exec();
 }

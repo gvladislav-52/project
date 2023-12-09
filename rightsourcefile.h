@@ -1,5 +1,5 @@
-#ifndef MAINSOURCE_H
-#define MAINSOURCE_H
+#ifndef RIGHTSOURCEFILE_H
+#define RIGHTSOURCEFILE_H
 
 #include <QQuickWidget>
 #include <QVBoxLayout>
@@ -8,16 +8,17 @@
 #include <QObject>
 #include <QTimer>
 
-class MainSource : public QObject
+class RightSourceFile : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString currentTime READ currentTime WRITE setCurrentTime NOTIFY currentTimeChanged FINAL)
 
 public:
-    MainSource(QObject *parent = nullptr);
-    void setcurrentTime(const QString &newCurrentTime);
+    RightSourceFile(QObject *parent = nullptr);
     QString currentTime() const;
     QUrl getUrl();
+
+    void setCurrentTime(const QString &newCurrentTime);
 
 signals:
     void currentTimeChanged();
@@ -27,8 +28,7 @@ private:
     QTimer * m_currentTimeTimer;
 public slots:
     void currentTimeTimerTimeout();
-    //QString getStr();
 
 };
 
-#endif // MAINSOURCE_H
+#endif // RIGHTSOURCEFILE_H

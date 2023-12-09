@@ -13,7 +13,7 @@ Item {
 
         Text {
             id: redittext
-            text:  mainClass.currentTime // model.textValue - это свойство, которое вы установите из C++ кода
+            text:  rightClass.currentTime // model.textValue - это свойство, которое вы установите из C++ кода
             color: "black"
             font.bold: true
             font.pixelSize: parent.width * 0.04
