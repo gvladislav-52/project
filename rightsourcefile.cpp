@@ -30,7 +30,7 @@ void RightSourceFile::setCurrentTime(const QString &newCurrentTime)
 void RightSourceFile::currentTimeTimerTimeout()
 {
     QDateTime dateTime;
-    QString currentTime = dateTime.currentDateTime().toString("hh:mm:ss");
+    QString currentTime = dateTime.currentDateTime().toString("hh:mm AP");
     //qDebug() << currentTime;
     setCurrentTime(currentTime);
 

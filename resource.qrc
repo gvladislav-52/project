@@ -33,5 +33,7 @@
         <file>LeftCharge.qml</file>
         <file>LeftImage.qml</file>
         <file>LeftSelect.qml</file>
+        <file>ui/UP.png</file>
+        <file>ui/DOWN.png</file>
     </qresource>
 </RCC>

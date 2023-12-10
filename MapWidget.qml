@@ -120,27 +120,68 @@ Item {
         icon.source: "qrc:/ui/plus.png"
     }
 
-    Row {
-        id: zoomLevelLayout
-        anchors {
-            right: parent.right
-            bottom: parent.bottom
-            margins: 10
-        }
+    // Row {
+    //     id: zoomLevelLayout
+    //     anchors {
+    //         right: parent.right
+    //         bottom: parent.bottom
+    //         margins: 10
+    //     }
 
-        Image {
-            source: "qrc:/ui/leans.png"
-            width: 30
-            height: 30
-        }
+    //     Image {
+    //         source: "qrc:/ui/leans.png"
+    //         width: 30
+    //         height: 30
+    //     }
+
+    //     Text {
+    //         id: zoomLevelText
+    //         text: " " + Math.floor(view.map.zoomLevel)
+    //         color: "black"
+    //         font.bold: true
+    //         font.pixelSize: 20
+    //         //leftMargin: 5
+    //     }
+    // }
+
+    Rectangle {
+        id: recttut
+        anchors.top: parent.top
+        width: parent.width
+        height: redittext.height // Установка высоты прямоугольника равной высоте текста
+        color: "lightgray"
+        opacity: 0.95
 
         Text {
-            id: zoomLevelText
-            text: " " + Math.floor(view.map.zoomLevel)
+            id: redittext
+            text: rightClass.currentTime
             color: "black"
             font.bold: true
-            font.pixelSize: 20
-            //leftMargin: 5
+            font.pixelSize: parent.width * 0.02
+            anchors.right: parent.right // Изменен анкер - теперь текст размещается справа от изображения
+            anchors.verticalCenter: battery.verticalCenter // Чтобы текст и изображение были выровнены по вертикали
+            anchors.rightMargin: 10
+        }
+    }
+
+    Rectangle {
+        id: selector
+        width: parent.height*0.08  // Ширина равна ширине родительского элемента минус 20 пикселей
+        height: parent.height*0.3 // Устанавливаем высоту квадрата
+        color: "black" // Устанавливаем цвет квадрата
+        anchors.top: parent.top // Размещаем квадрат вверху родительского элемента
+        anchors.left: parent.left // Размещаем квадрат слева родительского элемента
+        //anchors.topMargin: 25 // Добавляем отступ сверху в 5 пикселей
+        //anchors.leftMargin: 5 // Добавляем отступ слева в 5 пикселей
+
+        ToolButton {
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: selector.height*0.25  // Ширина равна ширине родительского элемента минус 20 пикселей
+            height: selector.height*0.25
+            contentItem: Image {
+                source: "qrc:/ui/P.png"
+                fillMode: Image.PreserveAspectFit
+            }
         }
     }
 }

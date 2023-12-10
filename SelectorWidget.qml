@@ -1,40 +1,39 @@
 import QtQuick 2.0
 import QtQuick.Controls
+import QtQuick.Layouts 1.15
 
 Rectangle {
-    width: parent.height/8.5  // Ширина равна ширине родительского элемента минус 20 пикселей
-    height: parent.height/2.5 // Устанавливаем высоту квадрата
-    color: "black" // Устанавливаем цвет квадрата
-    anchors.top: parent.top // Размещаем квадрат вверху родительского элемента
-    anchors.left: parent.left // Размещаем квадрат слева родительского элемента
-    //anchors.topMargin: 5 // Добавляем отступ сверху в 5 пикселей
-    //anchors.leftMargin: 5 // Добавляем отступ слева в 5 пикселей
+    id: asd
+    anchors.bottom: parent.bottom
+    color: "black"
+    ColumnLayout {
+        id: rowTemp
+        anchors.centerIn: asd
+        Layout.preferredWidth: asd.width
+        Layout.preferredHeight: asd.height
 
-    ToolButton {
-        anchors.horizontalCenter: parent.horizontalCenter
-        width: parent.height/3.5  // Ширина равна ширине родительского элемента минус 20 пикселей
-        height: parent.height/3.5
-        contentItem: Image {
-            source: "qrc:/ui/P.png"
-            fillMode: Image.PreserveAspectFit
+        ToolButton {
+            id: zoomInButton
+            icon.source: "qrc:/ui/UP.png"
+            implicitWidth: text.width // Привязка ширины кнопки к ширине текста
+            Layout.preferredHeight: asd.height * 0.2 // Масштабирование высоты кнопки
+            //Layout.alignment: Qt.AlignTop | Qt.AlignHCenter // Выравнивание кнопки по верхнему краю и по центру по горизонтали
+        }
+
+        Text {
+            id: text
+            text: qsTr("70°");
+            color: "white"
+            font.bold: true
+            font.pixelSize: Math.min(asd.width, asd.height) * 0.25
+        }
+
+        ToolButton {
+            id: zoomInButton2
+            icon.source: "qrc:/ui/DOWN.png"
+            implicitWidth: text.width // Привязка ширины кнопки к ширине текста
+            Layout.preferredHeight: asd.height * 0.2 // Масштабирование высоты кнопки
+            //Layout.alignment: Qt.AlignBottom | Qt.AlignHCenter // Выравнивание кнопки по нижнему краю и по центру по горизонтали
         }
     }
-
-    ToolButton {
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: parent.verticalCenter
-        anchors.topMargin: -parent.height * 0.23
-        width: parent.height/3.5  // Ширина равна ширине родительского элемента минус 20 пикселей
-        height: parent.height/3.5
-        contentItem: Image {
-            source: "qrc:/ui/P.png"
-            fillMode: Image.PreserveAspectFit
-        }
-    }
-
-
-
-
-
-
 }

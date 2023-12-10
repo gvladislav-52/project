@@ -8,5 +8,4 @@ Item {
            anchors.rightMargin: 10
            anchors.horizontalCenter: horizontalCenter
        }
-    SelectorWidget {}
 }

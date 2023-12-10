@@ -8,29 +8,23 @@ Window {
     visible: true
     title: qsTr("Hello World")
 
+    ColumnLayout {
+        anchors.fill: parent
     RowLayout {
         anchors.fill: parent
-
-        // Loader {
-        //     source: "qrc:/123.qml"
-        // }
         MainLeftWidget {
             Layout.fillHeight: true
-            //Layout.fillWidth: true
             Layout.preferredWidth: parent.width * 0.3
         }
 
         MainRightWidget {
             Layout.fillHeight: true
-            //Layout.fillWidth: true
             Layout.preferredWidth: parent.width * 0.7
         }
     }
-
-    // Loader {
-    //     source: "qrc:/MainLeftWidget.qml"
-    //     Layout.fillHeight: true
-    //     //Layout.fillWidth: true
-    //     Layout.preferredWidth: parent.width * 0.3
-    // }
+    SelectorWidget {
+            Layout.fillWidth: true
+            Layout.preferredHeight: parent.height * 0.13
+        }
+    }
 }
