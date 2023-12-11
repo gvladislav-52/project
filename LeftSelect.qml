@@ -34,7 +34,7 @@ Rectangle {
             anchors.right: parent.horizontalCenter
             anchors.rightMargin: -parent.width * 0.35
             contentItem: Image {
-                source: "qrc:/ui/music.png"
+                source: "qrc:/ui/setting.png"
                 fillMode: Image.PreserveAspectFit
             }
         }

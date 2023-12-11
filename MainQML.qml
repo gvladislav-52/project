@@ -10,19 +10,19 @@ Window {
 
     ColumnLayout {
         anchors.fill: parent
-    RowLayout {
-        anchors.fill: parent
-        MainLeftWidget {
-            Layout.fillHeight: true
-            Layout.preferredWidth: parent.width * 0.3
-        }
+        RowLayout {
+            anchors.fill: parent
+            MainLeftWidget {
+                Layout.fillHeight: true
+                Layout.preferredWidth: parent.width * 0.3
+            }
 
-        MainRightWidget {
-            Layout.fillHeight: true
-            Layout.preferredWidth: parent.width * 0.7
+            MainRightWidget {
+                Layout.fillHeight: true
+                Layout.preferredWidth: parent.width * 0.7
+            }
         }
-    }
-    SelectorWidget {
+        SelectorWidget {
             Layout.fillWidth: true
             Layout.preferredHeight: parent.height * 0.13
         }

@@ -35,5 +35,14 @@
         <file>LeftSelect.qml</file>
         <file>ui/UP.png</file>
         <file>ui/DOWN.png</file>
+        <file>ui/Vint.png</file>
+        <file>ui/seatLeft.png</file>
+        <file>ui/seatRight.png</file>
+        <file>ui/heaperback.png</file>
+        <file>ui/heaperfront.png</file>
+        <file>ui/carIcon.png</file>
+        <file>ui/sound.png</file>
+        <file>ui/phone.png</file>
+        <file>ui/setting.png</file>
     </qresource>
 </RCC>
