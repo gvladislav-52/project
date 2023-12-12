@@ -4,6 +4,7 @@ Item {
     visible: true
     anchors.fill: parent
     Rectangle {
+        radius: 10
         anchors.bottom: parent.bottom
         width: parent.width
         anchors.bottomMargin: 5

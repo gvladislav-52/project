@@ -44,5 +44,14 @@
         <file>ui/sound.png</file>
         <file>ui/phone.png</file>
         <file>ui/setting.png</file>
+        <file>ui/R.png</file>
+        <file>ui/N.png</file>
+        <file>ui/S.png</file>
+        <file>ui/D.png</file>
+        <file>HeaderMapWidget.qml</file>
+        <file>SelectorMapWidget.qml</file>
+        <file>ui/account.png</file>
+        <file>ui/locker.png</file>
+        <file>ui/soundheader.png</file>
     </qresource>
 </RCC>

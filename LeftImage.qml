@@ -6,9 +6,9 @@ Item {
     height: 616
 
     Image {
-        source: "qrc:/ui/carUp2.png" // путь к вашей картинке
-        anchors.fill: parent // растягиваем картинку на всю доступную площадь
-        fillMode: Image.PreserveAspectFit // сохраняем пропорции картинки и подгоняем ее внутри элемента
+        source: "qrc:/ui/carUp2.png"
+        anchors.fill: parent
+        fillMode: Image.PreserveAspectFit
     }
 
     Button
@@ -39,7 +39,7 @@ Item {
         height: parent.height * 0.2
         anchors.right: parent.horizontalCenter
         anchors.bottom: parent.verticalCenter
-        anchors.rightMargin: 40 // отступ слева
+        anchors.rightMargin: 40
         anchors.bottomMargin: -20
         opacity: 0.5
     }
@@ -50,7 +50,7 @@ Item {
         height: parent.height * 0.2
         anchors.left: parent.horizontalCenter
         anchors.bottom: parent.verticalCenter
-        anchors.leftMargin: 40 // отступ слева
+        anchors.leftMargin: 40
         anchors.bottomMargin: -20
         opacity: 0.5
     }
@@ -61,19 +61,19 @@ Item {
         height: parent.height * 0.2
         anchors.right: parent.horizontalCenter
         anchors.top: parent.verticalCenter
-        anchors.rightMargin: 40 // отступ справа
+        anchors.rightMargin: 40
         anchors.topMargin: 20
         opacity: 0.5
     }
 
     Button {
         text: "RightDown"
-        width: parent.width * 0.175 // ширина кнопки будет равна 20% ширины родительского элемента
-        height: parent.height * 0.2 // высота кнопки будет равна 20% высоты родительского элемента
+        width: parent.width * 0.175
+        height: parent.height * 0.2
         anchors.left: parent.horizontalCenter
         anchors.top: parent.verticalCenter
-        anchors.leftMargin: 40 // отступ слева
+        anchors.leftMargin: 40
         anchors.topMargin: 20
-        opacity: 0.5 // кнопка полностью прозрачна
+        opacity: 0.5
     }
 }

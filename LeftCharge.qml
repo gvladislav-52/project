@@ -1,14 +1,14 @@
 import QtQuick 2.0
 
 Rectangle {
-    color: "white" // Устанавливаем цвет квадрата
+    color: "white"
     width: 200
     height: 200
 
     Image {
-        source: "qrc:/ui/thunder.png" // путь к вашей картинке
+        source: "qrc:/ui/thunder.png"
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.topMargin: 15 // Отступ картинки от верхней части
+        anchors.topMargin: 15
         width: parent.width * 0.15
         height: parent.height * 0.5
         anchors.top: parent.top
@@ -24,8 +24,8 @@ Rectangle {
 
     Image {
         id: battery
-        source: "qrc:/ui/battery.png" // путь к вашей картинке
-        anchors.right: parent.right // Размещаем изображение справа
+        source: "qrc:/ui/battery.png"
+        anchors.right: parent.right
         width: parent.width * 0.15
         height: parent.height * 0.25
         anchors.bottomMargin: 10
@@ -39,8 +39,8 @@ Rectangle {
         color: "black"
         font.bold: true
         font.pixelSize: parent.width * 0.04
-        anchors.right: battery.left // Изменён анкер - теперь текст размещается слева от изображения
-        anchors.verticalCenter: battery.verticalCenter // Чтобы текст и изображение были выровнены по вертикали
+        anchors.right: battery.left
+        anchors.verticalCenter: battery.verticalCenter
         anchors.rightMargin: 5
     }
 
