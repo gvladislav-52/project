@@ -1,5 +1,5 @@
 #include "leftsourcefile.h"
-#include "rightsourcefile.h"
+#include "headermap.h"
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QApplication>
@@ -11,8 +11,8 @@ int main(int argc, char *argv[])
 #endif
     QGuiApplication app (argc, argv);
 
-    LeftSourceFile leftSource;
-    RightSourceFile rightSource;
+    //LeftSourceFile leftSource;
+    headerMap header_temp;
     QQmlApplicationEngine engine;
     const QUrl url (QStringLiteral("qrc:/MainQML.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated, &app, [url](QObject *obj, const QUrl &objUrl)
@@ -24,6 +24,7 @@ int main(int argc, char *argv[])
     engine.load(url);
     QQmlContext*rootContext = engine.rootContext();
     //rootContext->setContextProperty("leftClass",&leftSource);
-    rootContext->setContextProperty("rightClass",&rightSource);
+    rootContext->setContextProperty("header_temp_qml",&header_temp);
+    rootContext->setContextProperty("header_temp_qml",&header_temp);
     return app.exec();
 }

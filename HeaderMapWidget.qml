@@ -10,7 +10,7 @@ Rectangle {
 
     Text {
         id: redittext
-        text: rightClass.currentTime
+        text: header_temp_qml.currentTime
         color: "black"
         font.bold: true
         font.pixelSize: parent.width * 0.02
@@ -72,7 +72,7 @@ Rectangle {
 
     Text {
         id: textSoundHeader
-        text: qsTr("10");
+        text: header_temp_qml.soundTemp
         color: "black"
         font.bold: true
         font.pixelSize: parent.width * 0.02

@@ -40,11 +40,12 @@ Rectangle {
                 color: upButtonLeft.pressed ? "lightgray" : "transparent"
                 radius: 10
             }
+            onClicked: header_temp_qml.setLeftSlotPlus()
         }
 
         Text {
             id: textTempLeft
-            text: qsTr("70°");
+            text: header_temp_qml.leftTemperat + "°"
             color: "white"
             font.bold: true
             font.pixelSize: Math.min(selectButtonFooter.width, selectButtonFooter.height) * 0.25
@@ -62,6 +63,7 @@ Rectangle {
                 color: downButtonLeft.pressed ? "lightgray" : "transparent"
                 radius: 10
             }
+            onClicked: header_temp_qml.setLeftSlotMinus()
         }
     }
 
@@ -83,11 +85,12 @@ Rectangle {
                 color: upButtonRight.pressed ? "lightgray" : "transparent"
                 radius: 10
             }
+            onClicked: header_temp_qml.setRightSlotPlus()
         }
 
         Text {
             id: textTempRight
-            text: qsTr("68°");
+            text: header_temp_qml.rightTemperat + "°"
             color: "white"
             font.bold: true
             font.pixelSize: Math.min(selectButtonFooter.width, selectButtonFooter.height) * 0.25
@@ -105,6 +108,7 @@ Rectangle {
                 color: downButtonRight.pressed ? "lightgray" : "transparent"
                 radius: 10
             }
+            onClicked: header_temp_qml.setRightSlotMinus()
         }
     }
 
@@ -239,6 +243,8 @@ Rectangle {
                 color: upButtonSound.pressed ? "lightgray" : "transparent"
                 radius: 10
             }
+
+            onClicked: header_temp_qml.setSoundSlotPlus()
         }
 
         ToolButton {
@@ -267,6 +273,7 @@ Rectangle {
                 color: downButtonSound.pressed ? "lightgray" : "transparent"
                 radius: 10
             }
+            onClicked: header_temp_qml.setSoundSlotMinus()
         }
     }
 }
