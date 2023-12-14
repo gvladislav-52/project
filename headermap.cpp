@@ -7,14 +7,12 @@
 
 headerMap::headerMap(QObject *parent) : QObject(parent), m_currentTime("12:34am")
 {
-    m_soundTemp = 0;
-    m_leftTemperat = 15;
-    m_rightTemperat = 15;
     m_currentTimeTimer = new QTimer(this);
     m_currentTimeTimer->setInterval(1000);
     m_currentTimeTimer->setSingleShot(true);
     connect(m_currentTimeTimer, &QTimer::timeout,this, &headerMap::currentTimeTimerTimeout);
     currentTimeTimerTimeout();
+    temperatureSlot();
 }
 
 QString headerMap::currentTime() const
@@ -40,120 +38,53 @@ void headerMap::currentTimeTimerTimeout()
     m_currentTimeTimer->start();
 }
 
-void headerMap::setSoundSlotPlus()
+void headerMap::temperatureSlot()
 {
-    if(m_soundTemp <20)
-        m_soundTemp++;
-    emit soundTempChanged();
-}
+    QNetworkAccessManager * manager = new QNetworkAccessManager();
+    QNetworkReply* reply = manager->get(QNetworkRequest(QUrl("https://api.openweathermap.org/data/2.5/weather?id=520555&units=metric&lang=ru&mode=xml&appid=6fb550ae11156e5729fa09c190689581")));
 
-void headerMap::setSoundSlotMinus()
-{
-    if(m_soundTemp > 0)
-        m_soundTemp--;
-    emit soundTempChanged();
-}
+    QEventLoop loop;
+    connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
+    loop.exec();
 
-void headerMap::setLeftSlotPlus()
-{
-    if(m_leftTemperat < 29)
-    {
-        if(m_rightTemperat < 29)
-        {
-            if((m_rightTemperat-m_leftTemperat == 4) || (m_rightTemperat-m_leftTemperat == -4))
-            {
-                m_rightTemperat++;
-                emit rightTemperatChanged();
+    QByteArray data =reply->readAll();
+    QString str = QString::fromUtf8(data);
+
+    reply->deleteLater();
+    manager->deleteLater();
+
+    //Разбираем полученные (XML) данные
+    QXmlStreamReader reader (str); //класс для разбора XML
+    QString temp;
+    while (!reader.atEnd()) {
+        if (reader.isStartElement()) {
+            QString name = reader.name().toString();
+
+            // ТЕМПЕРАТУРА ВОЗДУХА
+            if (name == "temperature") {
+                QXmlStreamAttributes attributes = reader.attributes();
+                if (attributes.hasAttribute("min")) {
+                    QString tempWithDot = attributes.value("min").toString();
+                    int dotIndex = tempWithDot.indexOf('.');
+                    temp = tempWithDot.left(dotIndex);
+                }
             }
         }
-        m_leftTemperat++;
+        reader.readNext();
     }
-    emit leftTemperatChanged();
-}
-
-void headerMap::setLeftSlotMinus()
-{
-    if(m_leftTemperat > 15)
-    {
-        if(m_rightTemperat > 15)
-            if((m_rightTemperat-m_leftTemperat == 4) || (m_rightTemperat-m_leftTemperat == -4))
-            {
-                m_rightTemperat--;
-                emit rightTemperatChanged();
-            }
-        m_leftTemperat--;
-    }
-    emit leftTemperatChanged();
-}
-
-void headerMap::setRightSlotPlus()
-{
-    if(m_rightTemperat < 29)
-    {
-        if(m_leftTemperat < 29)
-        {
-            if((m_rightTemperat-m_leftTemperat == 4) || (m_rightTemperat-m_leftTemperat == -4))
-            {
-                m_leftTemperat++;
-                emit leftTemperatChanged();
-            }
-        }
-        m_rightTemperat++;
-    }
-    emit rightTemperatChanged();
-}
-
-void headerMap::setRightSlotMinus()
-{
-    if(m_rightTemperat > 15)
-    {
-        if(m_leftTemperat > 15)
-            if((m_rightTemperat-m_leftTemperat == 4) || (m_rightTemperat-m_leftTemperat == -4))
-            {
-                m_leftTemperat--;
-                emit leftTemperatChanged();
-            }
-        m_rightTemperat--;
-    }
-    emit rightTemperatChanged();
+    settemperature(temp);
 }
 
 
-int headerMap::soundTemp() const
+QString headerMap::temperature() const
 {
-    return m_soundTemp;
+    return m_temperature;
 }
 
-void headerMap::setSoundTemp(const int &newSoundTemp)
+void headerMap::settemperature(const QString &newTemperature)
 {
-    if (m_soundTemp == newSoundTemp)
+    if (m_temperature == newTemperature)
         return;
-    m_soundTemp = newSoundTemp;
-    emit soundTempChanged();
-}
-
-int headerMap::leftTemperat() const
-{
-    return m_leftTemperat;
-}
-
-void headerMap::setleftTemperat(int newLeftTemperat)
-{
-    if (m_leftTemperat == newLeftTemperat)
-        return;
-    m_leftTemperat = newLeftTemperat;
-    emit leftTemperatChanged();
-}
-
-int headerMap::rightTemperat() const
-{
-    return m_rightTemperat;
-}
-
-void headerMap::setrightTemperat(int newRightTemperat)
-{
-    if (m_rightTemperat == newRightTemperat)
-        return;
-    m_rightTemperat = newRightTemperat;
-    emit rightTemperatChanged();
+    m_temperature = newTemperature;
+    emit temperatureChanged();
 }

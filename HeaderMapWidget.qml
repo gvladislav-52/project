@@ -21,12 +21,12 @@ Rectangle {
 
     Text {
         id: textTemp
-        text: qsTr("-17°");
+        text: header_temp_qml.temperature + "°C"
         color: "black"
         font.bold: true
         font.pixelSize: parent.width * 0.02
         anchors.left: redittext.horizontalCenter
-        anchors.leftMargin: -parent.width * 0.13
+        anchors.leftMargin: -parent.width * 0.15
         anchors.verticalCenter: headerMap.verticalCenter
     }
 
@@ -72,7 +72,7 @@ Rectangle {
 
     Text {
         id: textSoundHeader
-        text: header_temp_qml.soundTemp
+        text: footer_temp_qml.soundTemp
         color: "black"
         font.bold: true
         font.pixelSize: parent.width * 0.02

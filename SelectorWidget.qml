@@ -40,12 +40,12 @@ Rectangle {
                 color: upButtonLeft.pressed ? "lightgray" : "transparent"
                 radius: 10
             }
-            onClicked: header_temp_qml.setLeftSlotPlus()
+            onClicked: footer_temp_qml.setLeft_SlotPlus()
         }
 
         Text {
             id: textTempLeft
-            text: header_temp_qml.leftTemperat + "°"
+            text: footer_temp_qml.left_Temparate + "°"
             color: "white"
             font.bold: true
             font.pixelSize: Math.min(selectButtonFooter.width, selectButtonFooter.height) * 0.25
@@ -63,7 +63,7 @@ Rectangle {
                 color: downButtonLeft.pressed ? "lightgray" : "transparent"
                 radius: 10
             }
-            onClicked: header_temp_qml.setLeftSlotMinus()
+            onClicked: footer_temp_qml.setLeft_SlotMinus()
         }
     }
 
@@ -85,12 +85,12 @@ Rectangle {
                 color: upButtonRight.pressed ? "lightgray" : "transparent"
                 radius: 10
             }
-            onClicked: header_temp_qml.setRightSlotPlus()
+            onClicked: footer_temp_qml.setRight_SlotPlus()
         }
 
         Text {
             id: textTempRight
-            text: header_temp_qml.rightTemperat + "°"
+            text: footer_temp_qml.right_Temparate + "°"
             color: "white"
             font.bold: true
             font.pixelSize: Math.min(selectButtonFooter.width, selectButtonFooter.height) * 0.25
@@ -108,7 +108,7 @@ Rectangle {
                 color: downButtonRight.pressed ? "lightgray" : "transparent"
                 radius: 10
             }
-            onClicked: header_temp_qml.setRightSlotMinus()
+            onClicked: footer_temp_qml.setRight_SlotMinus()
         }
     }
 
@@ -244,7 +244,7 @@ Rectangle {
                 radius: 10
             }
 
-            onClicked: header_temp_qml.setSoundSlotPlus()
+            onClicked: footer_temp_qml.setSound_SlotPlus()
         }
 
         ToolButton {
@@ -273,7 +273,7 @@ Rectangle {
                 color: downButtonSound.pressed ? "lightgray" : "transparent"
                 radius: 10
             }
-            onClicked: header_temp_qml.setSoundSlotMinus()
+            onClicked: footer_temp_qml.setSound_SlotMinus()
         }
     }
 }

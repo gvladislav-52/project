@@ -1,5 +1,6 @@
 #include "leftsourcefile.h"
 #include "headermap.h"
+#include "footer.h"
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QApplication>
@@ -13,6 +14,7 @@ int main(int argc, char *argv[])
 
     //LeftSourceFile leftSource;
     headerMap header_temp;
+    footer footer_temp;
     QQmlApplicationEngine engine;
     const QUrl url (QStringLiteral("qrc:/MainQML.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated, &app, [url](QObject *obj, const QUrl &objUrl)
@@ -25,6 +27,6 @@ int main(int argc, char *argv[])
     QQmlContext*rootContext = engine.rootContext();
     //rootContext->setContextProperty("leftClass",&leftSource);
     rootContext->setContextProperty("header_temp_qml",&header_temp);
-    rootContext->setContextProperty("header_temp_qml",&header_temp);
+    rootContext->setContextProperty("footer_temp_qml",&footer_temp);
     return app.exec();
 }

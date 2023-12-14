@@ -7,57 +7,40 @@
 #include <QLabel>
 #include <QObject>
 #include <QTimer>
+#include <QtWidgets>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include <QNetworkAccessManager>
+#include <QtXml>
 
 class headerMap : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString currentTime READ currentTime WRITE setCurrentTime NOTIFY currentTimeChanged FINAL)
-    Q_PROPERTY(int soundTemp READ soundTemp WRITE setSoundTemp NOTIFY soundTempChanged FINAL)
-    Q_PROPERTY(int leftTemperat READ leftTemperat WRITE setleftTemperat NOTIFY leftTemperatChanged FINAL)
-    Q_PROPERTY(int rightTemperat READ rightTemperat WRITE setrightTemperat NOTIFY rightTemperatChanged FINAL)
+    Q_PROPERTY(QString temperature READ temperature WRITE settemperature NOTIFY temperatureChanged FINAL)
 public:
     headerMap(QObject *parent = nullptr);
     QString currentTime() const;
     void setCurrentTime(const QString &newCurrentTime);
 
-    int soundTemp() const;
-    void setSoundTemp(const int &newSoundTemp);
-
-    int leftTemperat() const;
-    void setleftTemperat(int newLeftTemperat);
-
-    int rightTemperat() const;
-    void setrightTemperat(int newRightTemperat);
+    QString temperature() const;
+    void settemperature(const QString &newTemperature);
 
 signals:
     void currentTimeChanged();
 
-    void soundTempChanged();
-
-    void leftTemperatChanged();
-
-    void rightTemperatChanged();
+    void temperatureChanged();
 
 private:
     QString m_currentTime;
     QTimer * m_currentTimeTimer;
-    int m_soundTemp;
+    QString temparature;
 
-    int m_leftTemperat;
-
-    int m_rightTemperat;
+    QString m_temperature;
 
 public slots:
     void currentTimeTimerTimeout();
-    void setSoundSlotPlus();
-    void setSoundSlotMinus();
-
-    void setLeftSlotPlus();
-    void setLeftSlotMinus();
-
-    void setRightSlotPlus();
-    void setRightSlotMinus();
-
+    void temperatureSlot();
 };
 
 #endif // HEADERMAP_H
