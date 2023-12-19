@@ -28,5 +28,11 @@ int main(int argc, char *argv[])
     //rootContext->setContextProperty("leftClass",&leftSource);
     rootContext->setContextProperty("header_temp_qml",&header_temp);
     rootContext->setContextProperty("footer_temp_qml",&footer_temp);
+#if QT_CONFIG(ssl)
+    engine.rootContext()->setContextProperty("supportsSsl",QSslSocket::supportsSsl());
+#else
+    engine.rootContext()->setContextProperty("supportsSsl", false);
+#endif
+    QMetaObject::invokeMethod(engine.rootObjects().value(0), "initializeProviders");
     return app.exec();
 }

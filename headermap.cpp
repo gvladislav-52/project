@@ -11,6 +11,7 @@ headerMap::headerMap(QObject *parent) : QObject(parent), m_currentTime("12:34am"
     m_currentTimeTimer->setInterval(1000);
     m_currentTimeTimer->setSingleShot(true);
     connect(m_currentTimeTimer, &QTimer::timeout,this, &headerMap::currentTimeTimerTimeout);
+    //connect(m_currentTimeTimer,&QTimer::timeout, this, &headerMap::temperatureSlot);
     currentTimeTimerTimeout();
     temperatureSlot();
 }
@@ -67,6 +68,7 @@ void headerMap::temperatureSlot()
                     QString tempWithDot = attributes.value("min").toString();
                     int dotIndex = tempWithDot.indexOf('.');
                     temp = tempWithDot.left(dotIndex);
+                    //qDebug() << temp;
                 }
             }
         }

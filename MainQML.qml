@@ -18,6 +18,7 @@ Window {
             }
 
             MainRightWidget {
+                id: rightchild
                 Layout.fillHeight: true
                 Layout.preferredWidth: parent.width * 0.7
             }
@@ -27,4 +28,8 @@ Window {
             Layout.preferredHeight: parent.height * 0.13
         }
     }
+
+    function initializeProviders() {
+                rightchild.initializeProviders()
+            }
 }

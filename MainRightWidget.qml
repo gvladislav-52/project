@@ -1,7 +1,8 @@
 import QtQuick 2.0
 
 Item {
-    MapWidget {}
+    MapWidget {
+    id: childid}
     HeaderMapWidget {}
     SelectorMapWidget {}
     MusicWidget {
@@ -10,4 +11,7 @@ Item {
            anchors.rightMargin: 10
            anchors.horizontalCenter: horizontalCenter
        }
+    function initializeProviders() {
+                childid.initializeProviders()
+            }
 }

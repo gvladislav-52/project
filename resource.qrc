@@ -53,5 +53,13 @@
         <file>ui/account.png</file>
         <file>ui/locker.png</file>
         <file>ui/soundheader.png</file>
+        <file>ItemPopupMenu.qml</file>
+        <file>MainMenu.qml</file>
+        <file>MapComponent.qml</file>
+        <file>MapPopupMenu.qml</file>
+        <file>MapSliders.qml</file>
+        <file>Marker.qml</file>
+        <file>MarkerPopupMenu.qml</file>
+        <file>MiniMap.qml</file>
     </qresource>
 </RCC>
