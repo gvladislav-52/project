@@ -5,7 +5,7 @@ import QtQuick
 import QtQuick.Controls
 import QtLocation
 
-MenuBar {
+Item {
     id: menuBar
     property variant mapTypeMenu: mapTypeMenu
     //property variant toolsMenu: toolsMenu
@@ -23,9 +23,9 @@ MenuBar {
             menu.removeItem(menu.itemAt(0))
     }
 
-    Menu {
+    Item {
         id: mapTypeMenu
-        title: qsTr("MapType")
+        //title: qsTr("MapType")
 
         Component {
             id: mapTypeMenuActionComponent

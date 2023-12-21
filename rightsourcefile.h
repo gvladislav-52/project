@@ -11,24 +11,18 @@
 class RightSourceFile : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(
-        QString currentTime READ currentTime WRITE setCurrentTime NOTIFY currentTimeChanged FINAL)
+    Q_PROPERTY(bool carLocked READ carLocked WRITE setcarLocked NOTIFY carLockedChanged FINAL)
 
 public:
     RightSourceFile(QObject *parent = nullptr);
-    QString currentTime() const;
-    QUrl getUrl();
-
-    void setCurrentTime(const QString &newCurrentTime);
-
+    bool carLocked() const;
+    void setcarLocked(bool newCarLocked);
 signals:
-    void currentTimeChanged();
-
+    void carLockedChanged();
 private:
-    QString m_currentTime;
-    QTimer *m_currentTimeTimer;
+    bool m_carLocked;
 public slots:
-    void currentTimeTimerTimeout();
+    void setcarLockeder(bool newCarLocked);
 };
 
 #endif // RIGHTSOURCEFILE_H

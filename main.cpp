@@ -3,7 +3,7 @@
 #include <QQmlApplicationEngine>
 #include "footer.h"
 #include "headermap.h"
-#include "leftsourcefile.h"
+#include "rightsourcefile.h"
 
 int main(int argc, char *argv[])
 {
@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
     //LeftSourceFile leftSource;
     headerMap header_temp;
     footer footer_temp;
+    RightSourceFile right_temp;
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/MainQML.qml"));
     QObject::connect(
@@ -32,6 +33,7 @@ int main(int argc, char *argv[])
     //rootContext->setContextProperty("leftClass",&leftSource);
     rootContext->setContextProperty("header_temp_qml", &header_temp);
     rootContext->setContextProperty("footer_temp_qml", &footer_temp);
+    rootContext->setContextProperty("right_temp_qml",&right_temp);
 #if QT_CONFIG(ssl)
     engine.rootContext()->setContextProperty("supportsSsl", QSslSocket::supportsSsl());
 #else

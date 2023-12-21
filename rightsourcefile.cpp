@@ -6,34 +6,28 @@
 
 RightSourceFile::RightSourceFile(QObject *parent)
     : QObject(parent)
-    , m_currentTime("12:34am")
 {
-    m_currentTimeTimer = new QTimer(this);
-    m_currentTimeTimer->setInterval(1000);
-    m_currentTimeTimer->setSingleShot(true);
-    connect(m_currentTimeTimer, &QTimer::timeout, this, &RightSourceFile::currentTimeTimerTimeout);
-    currentTimeTimerTimeout();
+
 }
 
-QString RightSourceFile::currentTime() const
+
+bool RightSourceFile::carLocked() const
 {
-    return m_currentTime;
+    return m_carLocked;
 }
 
-void RightSourceFile::setCurrentTime(const QString &newCurrentTime)
+void RightSourceFile::setcarLocked(bool newCarLocked)
 {
-    if (m_currentTime == newCurrentTime)
+    if (m_carLocked == newCarLocked)
         return;
-    m_currentTime = newCurrentTime;
-    emit currentTimeChanged();
+    m_carLocked = newCarLocked;
+    emit carLockedChanged();
 }
 
-void RightSourceFile::currentTimeTimerTimeout()
+void RightSourceFile::setcarLockeder(bool newCarLocked)
 {
-    QDateTime dateTime;
-    QString currentTime = dateTime.currentDateTime().toString("hh:mm AP");
-    //qDebug() << currentTime;
-    setCurrentTime(currentTime);
-
-    m_currentTimeTimer->start();
+    if (m_carLocked == newCarLocked)
+        return;
+    m_carLocked = newCarLocked;
+    emit carLockedChanged();
 }

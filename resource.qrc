@@ -61,5 +61,8 @@
         <file>Marker.qml</file>
         <file>MarkerPopupMenu.qml</file>
         <file>MiniMap.qml</file>
+        <file>ui/15810.png</file>
+        <file>ui/sun.png</file>
+        <file>ui/menu.png</file>
     </qresource>
 </RCC>

@@ -317,16 +317,33 @@ support"
                 }
             }
 
-            Button {
-                text: "Нажми меня"
-                onClicked: {
-                    console.log("Кнопка работает")
-                    //console.debug("Отладочная информация")
-                    mainMenu.mapTypeMenu.createMenu(map,3)
+            Image {
+                id: mapSunSet
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    right: parent.left
+                    rightMargin: -parent.width * 0.055
                 }
-                anchors.centerIn: parent
-            }
 
+                width: parent.width/20
+                height: parent.height/20
+                fillMode: Image.PreserveAspectFit
+                source:
+                {
+                    right_temp_qml.carLocked ? "qrc:/ui/15810.png": "qrc:/ui/sun.png"
+                }
+                MouseArea
+                {
+                    anchors.fill: parent
+                    onClicked: {
+                        right_temp_qml.setcarLockeder(!right_temp_qml.carLocked)
+                        if(right_temp_qml.carLocked)
+                            mainMenu.mapTypeMenu.createMenu(map,0)
+                        else
+                            mainMenu.mapTypeMenu.createMenu(map,3)
+                    }
+                }
+            }
         }
     }
 
@@ -350,15 +367,6 @@ support"
         //     mapview.map.plugin.locales = lang;
         //     stackView.pop(page)
         // }
-
-        onSelectMapType: (mapType) => {
-            stackView.pop(page)
-            for (var i = 0; i < mapTypeMenu.count; i++) {
-                mapTypeMenu.actionAt(i).checked = mapTypeMenu.actionAt(i).text === mapType.name
-            }
-            mapview.map.activeMapType = mapType
-        }
-
 
         // onSelectTool: (tool) => {
         //     switch (tool) {
