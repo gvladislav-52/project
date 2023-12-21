@@ -1,35 +1,39 @@
-#include "leftsourcefile.h"
-#include "headermap.h"
-#include "footer.h"
+#include <QApplication>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include <QApplication>
+#include "footer.h"
+#include "headermap.h"
+#include "leftsourcefile.h"
 
 int main(int argc, char *argv[])
 {
-#if QT_VERSION <QT_VERSION_CHECK(6,6,1)
+#if QT_VERSION < QT_VERSION_CHECK(6, 6, 1)
     QCoreApplication::setAttribure(Qt::AA_EnableHighDpiScaling);
 #endif
-    QGuiApplication app (argc, argv);
+    QGuiApplication app(argc, argv);
 
     //LeftSourceFile leftSource;
     headerMap header_temp;
     footer footer_temp;
     QQmlApplicationEngine engine;
-    const QUrl url (QStringLiteral("qrc:/MainQML.qml"));
-    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated, &app, [url](QObject *obj, const QUrl &objUrl)
-        {
-            if(!obj && url == objUrl)
+    const QUrl url(QStringLiteral("qrc:/MainQML.qml"));
+    QObject::connect(
+        &engine,
+        &QQmlApplicationEngine::objectCreated,
+        &app,
+        [url](QObject *obj, const QUrl &objUrl) {
+            if (!obj && url == objUrl)
                 QCoreApplication::exit(-1);
-        },Qt::QueuedConnection);
+        },
+        Qt::QueuedConnection);
 
     engine.load(url);
-    QQmlContext*rootContext = engine.rootContext();
+    QQmlContext *rootContext = engine.rootContext();
     //rootContext->setContextProperty("leftClass",&leftSource);
-    rootContext->setContextProperty("header_temp_qml",&header_temp);
-    rootContext->setContextProperty("footer_temp_qml",&footer_temp);
+    rootContext->setContextProperty("header_temp_qml", &header_temp);
+    rootContext->setContextProperty("footer_temp_qml", &footer_temp);
 #if QT_CONFIG(ssl)
-    engine.rootContext()->setContextProperty("supportsSsl",QSslSocket::supportsSsl());
+    engine.rootContext()->setContextProperty("supportsSsl", QSslSocket::supportsSsl());
 #else
     engine.rootContext()->setContextProperty("supportsSsl", false);
 #endif

@@ -1,12 +1,7 @@
 #include "leftsourcefile.h"
-#include <QRandomGenerator>
-#include <QDateTime>
-#include <QString>
 #include <QDateTime>
 #include <QDebug>
+#include <QRandomGenerator>
+#include <QString>
 
-LeftSourceFile::LeftSourceFile(QObject *parent)
-{
-
-}
-
+LeftSourceFile::LeftSourceFile(QObject *parent) {}

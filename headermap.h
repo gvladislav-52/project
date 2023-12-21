@@ -1,23 +1,25 @@
 #ifndef HEADERMAP_H
 #define HEADERMAP_H
 
+#include <QLabel>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QNetworkRequest>
+#include <QObject>
 #include <QQuickWidget>
+#include <QTimer>
 #include <QVBoxLayout>
 #include <QtQuick>
-#include <QLabel>
-#include <QObject>
-#include <QTimer>
 #include <QtWidgets>
-#include <QNetworkRequest>
-#include <QNetworkReply>
-#include <QNetworkAccessManager>
 #include <QtXml>
 
 class headerMap : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString currentTime READ currentTime WRITE setCurrentTime NOTIFY currentTimeChanged FINAL)
-    Q_PROPERTY(QString temperature READ temperature WRITE settemperature NOTIFY temperatureChanged FINAL)
+    Q_PROPERTY(
+        QString currentTime READ currentTime WRITE setCurrentTime NOTIFY currentTimeChanged FINAL)
+    Q_PROPERTY(
+        QString temperature READ temperature WRITE settemperature NOTIFY temperatureChanged FINAL)
 public:
     headerMap(QObject *parent = nullptr);
     QString currentTime() const;
@@ -33,7 +35,7 @@ signals:
 
 private:
     QString m_currentTime;
-    QTimer * m_currentTimeTimer;
+    QTimer *m_currentTimeTimer;
     QString temparature;
 
     QString m_temperature;

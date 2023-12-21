@@ -6,8 +6,10 @@
 class footer : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(int left_Temparate READ left_Temparate WRITE setleft_Temparate NOTIFY left_TemparateChanged FINAL)
-    Q_PROPERTY(int right_Temparate READ right_Temparate WRITE setright_Temparate NOTIFY right_TemparateChanged FINAL)
+    Q_PROPERTY(int left_Temparate READ left_Temparate WRITE setleft_Temparate NOTIFY
+                   left_TemparateChanged FINAL)
+    Q_PROPERTY(int right_Temparate READ right_Temparate WRITE setright_Temparate NOTIFY
+                   right_TemparateChanged FINAL)
     Q_PROPERTY(int soundTemp READ soundTemp WRITE setSoundTemp NOTIFY soundTempChanged FINAL)
 public:
     explicit footer(QObject *parent = nullptr);

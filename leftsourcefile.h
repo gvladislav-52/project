@@ -1,12 +1,12 @@
 #ifndef LEFTSOURCEFILE_H
 #define LEFTSOURCEFILE_H
 
-#include <QQuickWidget>
-#include <QVBoxLayout>
-#include <QtQuick>
 #include <QLabel>
 #include <QObject>
+#include <QQuickWidget>
 #include <QTimer>
+#include <QVBoxLayout>
+#include <QtQuick>
 
 class LeftSourceFile : public QObject
 {
@@ -14,8 +14,6 @@ class LeftSourceFile : public QObject
 
 public:
     LeftSourceFile(QObject *parent = nullptr);
-
-
 };
 
 #endif // LEFTSOURCEFILE_H

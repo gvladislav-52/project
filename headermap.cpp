@@ -1,16 +1,17 @@
 #include "headermap.h"
-#include <QRandomGenerator>
-#include <QDateTime>
-#include <QString>
 #include <QDateTime>
 #include <QDebug>
+#include <QRandomGenerator>
+#include <QString>
 
-headerMap::headerMap(QObject *parent) : QObject(parent), m_currentTime("12:34am")
+headerMap::headerMap(QObject *parent)
+    : QObject(parent)
+    , m_currentTime("12:34am")
 {
     m_currentTimeTimer = new QTimer(this);
     m_currentTimeTimer->setInterval(1000);
     m_currentTimeTimer->setSingleShot(true);
-    connect(m_currentTimeTimer, &QTimer::timeout,this, &headerMap::currentTimeTimerTimeout);
+    connect(m_currentTimeTimer, &QTimer::timeout, this, &headerMap::currentTimeTimerTimeout);
     //connect(m_currentTimeTimer,&QTimer::timeout, this, &headerMap::temperatureSlot);
     currentTimeTimerTimeout();
     temperatureSlot();
@@ -41,21 +42,23 @@ void headerMap::currentTimeTimerTimeout()
 
 void headerMap::temperatureSlot()
 {
-    QNetworkAccessManager * manager = new QNetworkAccessManager();
-    QNetworkReply* reply = manager->get(QNetworkRequest(QUrl("https://api.openweathermap.org/data/2.5/weather?id=520555&units=metric&lang=ru&mode=xml&appid=6fb550ae11156e5729fa09c190689581")));
+    QNetworkAccessManager *manager = new QNetworkAccessManager();
+    QNetworkReply *reply = manager->get(QNetworkRequest(QUrl(
+        "https://api.openweathermap.org/data/2.5/"
+        "weather?id=520555&units=metric&lang=ru&mode=xml&appid=6fb550ae11156e5729fa09c190689581")));
 
     QEventLoop loop;
     connect(reply, &QNetworkReply::finished, &loop, &QEventLoop::quit);
     loop.exec();
 
-    QByteArray data =reply->readAll();
+    QByteArray data = reply->readAll();
     QString str = QString::fromUtf8(data);
 
     reply->deleteLater();
     manager->deleteLater();
 
     //Разбираем полученные (XML) данные
-    QXmlStreamReader reader (str); //класс для разбора XML
+    QXmlStreamReader reader(str); //класс для разбора XML
     QString temp;
     while (!reader.atEnd()) {
         if (reader.isStartElement()) {
@@ -76,7 +79,6 @@ void headerMap::temperatureSlot()
     }
     settemperature(temp);
 }
-
 
 QString headerMap::temperature() const
 {

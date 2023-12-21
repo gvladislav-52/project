@@ -1,16 +1,17 @@
 #include "rightsourcefile.h"
-#include <QRandomGenerator>
-#include <QDateTime>
-#include <QString>
 #include <QDateTime>
 #include <QDebug>
+#include <QRandomGenerator>
+#include <QString>
 
-RightSourceFile::RightSourceFile(QObject *parent) : QObject(parent), m_currentTime("12:34am")
+RightSourceFile::RightSourceFile(QObject *parent)
+    : QObject(parent)
+    , m_currentTime("12:34am")
 {
     m_currentTimeTimer = new QTimer(this);
     m_currentTimeTimer->setInterval(1000);
     m_currentTimeTimer->setSingleShot(true);
-    connect(m_currentTimeTimer, &QTimer::timeout,this, &RightSourceFile::currentTimeTimerTimeout);
+    connect(m_currentTimeTimer, &QTimer::timeout, this, &RightSourceFile::currentTimeTimerTimeout);
     currentTimeTimerTimeout();
 }
 

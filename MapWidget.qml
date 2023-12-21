@@ -21,8 +21,9 @@ Item {
     property variant toCoordinate: QtPositioning.coordinate(59.9645, 10.671)
     //! [routecoordinate]
 
-    function createMap(provider)
+    function initializeProviders(provider1)
     {
+        var provider = "osm"
         if (parameters && parameters.length>0)
             plugin = Qt.createQmlObject ('import QtLocation; Plugin{ name:"' + provider + '"; parameters: appWindow.parameters}', appWindow)
         else
@@ -68,35 +69,6 @@ Item {
         mapview.forceActiveFocus()
     }
 
-    function getPlugins()
-    {
-        var plugin = Qt.createQmlObject ('import QtLocation; Plugin {}', appWindow)
-        var myArray = new Array()
-        for (var i = 0; i<plugin.availableServiceProviders.length; i++) {
-            var tempPlugin = Qt.createQmlObject ('import QtLocation; Plugin {name: "' + plugin.availableServiceProviders[i]+ '"}', appWindow)
-            if (tempPlugin.supportsMapping())
-                myArray.push(tempPlugin.name)
-        }
-        myArray.sort()
-        return myArray
-    }
-
-    function initializeProviders()
-    {
-        var parameters = new Array()
-        for (var prop in pluginParameters){
-            var parameter = Qt.createQmlObject('import QtLocation; PluginParameter{ name: "'+ prop + '"; value: "' + pluginParameters[prop]+'"}',appWindow)
-            parameters.push(parameter)
-        }
-        appWindow.parameters = parameters
-        var plugins = getPlugins()
-        mainMenu.providerMenu.createMenu(plugins)
-        for (var i = 0; i<plugins.length; i++) {
-            if (plugins[i] === "osm")
-                mainMenu.selectProvider(plugins[i])
-        }
-    }
-
     //title: qsTr("Mapviewer")
     height: parent.height
     width: parent.width
@@ -120,118 +92,6 @@ Item {
         city: "Oslo"
         country: "Norway"
         postalCode: "0791"
-    }
-
-    MainMenu {
-        id: mainMenu
-        plugin: appWindow.plugin
-
-        function toggleMiniMapState()
-        {
-            console.log("MiniMap with " + plugin)
-            if (minimap) {
-                minimap.destroy()
-                minimap = null
-            } else {
-                minimap = Qt.createQmlObject ('import "map"; MiniMap{ z: mapview.z + 2 }', mapview)
-            }
-        }
-
-        function setLanguage(lang)
-        {
-            mapview.map.plugin.locales = lang;
-            stackView.pop(page)
-        }
-
-        onSelectProvider: (providerName) => {
-            stackView.pop()
-            for (var i = 0; i < providerMenu.count; i++) {
-                providerMenu.actionAt(i).checked = providerMenu.actionAt(i).text === providerName
-            }
-
-            createMap(providerName)
-            if (mapview.error === mapview.NoError) {
-                selectMapType(mapview.map.activeMapType)
-            } else {
-                mainMenu.clearMenu(mapTypeMenu)
-            }
-        }
-
-        onSelectMapType: (mapType) => {
-            stackView.pop(page)
-            for (var i = 0; i < mapTypeMenu.count; i++) {
-                mapTypeMenu.actionAt(i).checked = mapTypeMenu.actionAt(i).text === mapType.name
-            }
-            mapview.map.activeMapType = mapType
-        }
-
-
-        onSelectTool: (tool) => {
-            switch (tool) {
-            case "AddressRoute":
-                stackView.pop({item:page, immediate: true})
-                stackView.push("forms/RouteAddress.qml" ,
-                                   { "plugin": mapview.map.plugin,
-                                       "toAddress": toAddress,
-                                       "fromAddress": fromAddress})
-                stackView.currentItem.showRoute.connect(mapview.calculateCoordinateRoute)
-                stackView.currentItem.showMessage.connect(stackView.showMessage)
-                stackView.currentItem.closeForm.connect(stackView.closeForm)
-                break
-            case "CoordinateRoute":
-                stackView.pop({item:page, immediate: true})
-                stackView.push("forms/RouteCoordinate.qml" ,
-                                    { "toCoordinate": toCoordinate,
-                                       "fromCoordinate": fromCoordinate})
-                stackView.currentItem.showRoute.connect(mapview.calculateCoordinateRoute)
-                stackView.currentItem.closeForm.connect(stackView.closeForm)
-                break
-            case "Geocode":
-                stackView.pop({item:page, immediate: true})
-                stackView.push("forms/Geocode.qml",
-                                   { "address": fromAddress})
-                stackView.currentItem.showPlace.connect(mapview.geocode)
-                stackView.currentItem.closeForm.connect(stackView.closeForm)
-                break
-            case "RevGeocode":
-                stackView.pop({item:page, immediate: true})
-                stackView.push("forms/ReverseGeocode.qml",
-                                    { "coordinate": fromCoordinate })
-                stackView.currentItem.showPlace.connect(mapview.geocode)
-                stackView.currentItem.closeForm.connect(stackView.closeForm)
-                break
-            case "Language":
-                stackView.pop({item:page, immediate: true})
-                stackView.push("forms/Locale.qml",
-                                   { "locale":  mapview.map.plugin.locales[0]})
-                stackView.currentItem.selectLanguage.connect(setLanguage)
-                stackView.currentItem.closeForm.connect(stackView.closeForm)
-                break
-            case "Clear":
-                mapview.map.clearData()
-                break
-            case "Prefetch":
-                mapview.map.prefetchData()
-                break
-            default:
-                console.log("Unsupported operation")
-            }
-        }
-
-        onToggleMapState: (state) => {
-            stackView.pop(page)
-            switch (state) {
-            case "FollowMe":
-                mapview.followme = !mapview.followme
-                break
-            case "MiniMap":
-                toggleMiniMapState()
-                isMiniMap = minimap
-                break
-            default:
-                console.log("Unsupported operation")
-            }
-        }
     }
 
     MapPopupMenu {
@@ -456,6 +316,115 @@ support"
                 onTapped: {
                 }
             }
+
+            Button {
+                text: "Нажми меня"
+                onClicked: {
+                    console.log("Кнопка работает")
+                    //console.debug("Отладочная информация")
+                    mainMenu.mapTypeMenu.createMenu(map,3)
+                }
+                anchors.centerIn: parent
+            }
+
         }
+    }
+
+    MainMenu {
+        id: mainMenu
+        //plugin: appWindow.plugin
+
+        // function toggleMiniMapState()
+        // {
+        //     console.log("MiniMap with " + plugin)
+        //     if (minimap) {
+        //         minimap.destroy()
+        //         minimap = null
+        //     } else {
+        //         minimap = Qt.createQmlObject ('import "map"; MiniMap{ z: mapview.z + 2 }', mapview)
+        //     }
+        // }
+
+        // function setLanguage(lang)
+        // {
+        //     mapview.map.plugin.locales = lang;
+        //     stackView.pop(page)
+        // }
+
+        onSelectMapType: (mapType) => {
+            stackView.pop(page)
+            for (var i = 0; i < mapTypeMenu.count; i++) {
+                mapTypeMenu.actionAt(i).checked = mapTypeMenu.actionAt(i).text === mapType.name
+            }
+            mapview.map.activeMapType = mapType
+        }
+
+
+        // onSelectTool: (tool) => {
+        //     switch (tool) {
+        //     case "AddressRoute":
+        //         stackView.pop({item:page, immediate: true})
+        //         stackView.push("forms/RouteAddress.qml" ,
+        //                            { "plugin": mapview.map.plugin,
+        //                                "toAddress": toAddress,
+        //                                "fromAddress": fromAddress})
+        //         stackView.currentItem.showRoute.connect(mapview.calculateCoordinateRoute)
+        //         stackView.currentItem.showMessage.connect(stackView.showMessage)
+        //         stackView.currentItem.closeForm.connect(stackView.closeForm)
+        //         break
+        //     case "CoordinateRoute":
+        //         stackView.pop({item:page, immediate: true})
+        //         stackView.push("forms/RouteCoordinate.qml" ,
+        //                             { "toCoordinate": toCoordinate,
+        //                                "fromCoordinate": fromCoordinate})
+        //         stackView.currentItem.showRoute.connect(mapview.calculateCoordinateRoute)
+        //         stackView.currentItem.closeForm.connect(stackView.closeForm)
+        //         break
+        //     case "Geocode":
+        //         stackView.pop({item:page, immediate: true})
+        //         stackView.push("forms/Geocode.qml",
+        //                            { "address": fromAddress})
+        //         stackView.currentItem.showPlace.connect(mapview.geocode)
+        //         stackView.currentItem.closeForm.connect(stackView.closeForm)
+        //         break
+        //     case "RevGeocode":
+        //         stackView.pop({item:page, immediate: true})
+        //         stackView.push("forms/ReverseGeocode.qml",
+        //                             { "coordinate": fromCoordinate })
+        //         stackView.currentItem.showPlace.connect(mapview.geocode)
+        //         stackView.currentItem.closeForm.connect(stackView.closeForm)
+        //         break
+        //     case "Language":
+        //         stackView.pop({item:page, immediate: true})
+        //         stackView.push("forms/Locale.qml",
+        //                            { "locale":  mapview.map.plugin.locales[0]})
+        //         stackView.currentItem.selectLanguage.connect(setLanguage)
+        //         stackView.currentItem.closeForm.connect(stackView.closeForm)
+        //         break
+        //     case "Clear":
+        //         mapview.map.clearData()
+        //         break
+        //     case "Prefetch":
+        //         mapview.map.prefetchData()
+        //         break
+        //     default:
+        //         console.log("Unsupported operation")
+        //     }
+        // }
+
+        // onToggleMapState: (state) => {
+        //     stackView.pop(page)
+        //     switch (state) {
+        //     case "FollowMe":
+        //         mapview.followme = !mapview.followme
+        //         break
+        //     case "MiniMap":
+        //         toggleMiniMapState()
+        //         isMiniMap = minimap
+        //         break
+        //     default:
+        //         console.log("Unsupported operation")
+        //     }
+        // }
     }
 }

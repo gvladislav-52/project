@@ -1,6 +1,7 @@
 #include "footer.h"
 
-footer::footer(QObject *parent): QObject{parent}
+footer::footer(QObject *parent)
+    : QObject{parent}
 {
     m_left_Temparate = 15;
     m_right_Temparate = 15;
@@ -22,13 +23,11 @@ void footer::setleft_Temparate(int newLeft_Temparate)
 
 void footer::setLeft_SlotPlus()
 {
-    if(m_left_Temparate < 29)
-    {
+    if (m_left_Temparate < 29) {
         m_left_Temparate++;
-        if(m_right_Temparate < 29)
-        {
-            if((m_right_Temparate-m_left_Temparate > 4) || (m_right_Temparate-m_left_Temparate < -4))
-            {
+        if (m_right_Temparate < 29) {
+            if ((m_right_Temparate - m_left_Temparate > 4)
+                || (m_right_Temparate - m_left_Temparate < -4)) {
                 m_right_Temparate++;
                 emit right_TemparateChanged();
             }
@@ -39,12 +38,11 @@ void footer::setLeft_SlotPlus()
 
 void footer::setLeft_SlotMinus()
 {
-    if(m_left_Temparate > 15)
-    {
+    if (m_left_Temparate > 15) {
         m_left_Temparate--;
-        if(m_right_Temparate > 15)
-            if((m_right_Temparate-m_left_Temparate > 4) || (m_right_Temparate-m_left_Temparate < -4))
-            {
+        if (m_right_Temparate > 15)
+            if ((m_right_Temparate - m_left_Temparate > 4)
+                || (m_right_Temparate - m_left_Temparate < -4)) {
                 m_right_Temparate--;
                 emit right_TemparateChanged();
             }
@@ -54,13 +52,11 @@ void footer::setLeft_SlotMinus()
 
 void footer::setRight_SlotPlus()
 {
-    if(m_right_Temparate < 29)
-    {
+    if (m_right_Temparate < 29) {
         m_right_Temparate++;
-        if(m_left_Temparate < 29)
-        {
-            if((m_right_Temparate-m_left_Temparate > 4) || (m_right_Temparate-m_left_Temparate < -4))
-            {
+        if (m_left_Temparate < 29) {
+            if ((m_right_Temparate - m_left_Temparate > 4)
+                || (m_right_Temparate - m_left_Temparate < -4)) {
                 m_left_Temparate++;
                 emit left_TemparateChanged();
             }
@@ -71,12 +67,11 @@ void footer::setRight_SlotPlus()
 
 void footer::setRight_SlotMinus()
 {
-    if(m_right_Temparate > 15)
-    {
+    if (m_right_Temparate > 15) {
         m_right_Temparate--;
-        if(m_left_Temparate > 15)
-            if((m_right_Temparate-m_left_Temparate > 4) || (m_right_Temparate-m_left_Temparate < -4))
-            {
+        if (m_left_Temparate > 15)
+            if ((m_right_Temparate - m_left_Temparate > 4)
+                || (m_right_Temparate - m_left_Temparate < -4)) {
                 m_left_Temparate--;
                 emit left_TemparateChanged();
             }
@@ -112,15 +107,14 @@ void footer::setSoundTemp(int newSoundTemp)
 
 void footer::setSound_SlotPlus()
 {
-    if(m_soundTemp <20)
+    if (m_soundTemp < 20)
         m_soundTemp++;
     emit soundTempChanged();
 }
 
 void footer::setSound_SlotMinus()
 {
-    if(m_soundTemp > 0)
+    if (m_soundTemp > 0)
         m_soundTemp--;
     emit soundTempChanged();
 }
-
