@@ -59,39 +59,155 @@ Row {
                 anchors.top: parent.top
                 anchors.topMargin: parent.height * 0.09
                 spacing: parent.width/5
+
                 Slider {
                     id: zoomSlider
-                    height: parent.height
-                    orientation : Qt.Vertical
+                    orientation: Qt.Vertical // Устанавливаем вертикальную ориентацию
+                    value : containerRow.mapSource.zoomLevel
                     from : containerRow.mapSource.minimumZoomLevel
                     to : containerRow.mapSource.maximumZoomLevel
-                    value : containerRow.mapSource.zoomLevel
+                    // Остальные свойства слайдера остаются без изменений
+
+                    background: Rectangle {
+                        anchors.horizontalCenter: circleSlide_zoomSlider.horizontalCenter
+                        implicitHeight: sliderRow.height // Изменяем высоту фона ориентируясь на вашу задачу
+                        height: implicitHeight
+                        width: 4
+                        radius: 2
+                        color: "black"
+
+                        Rectangle {
+                            width: 4
+                            height: zoomSlider.visualPosition * parent.height
+                            color: "lightgray"
+                            radius: 2
+                        }
+                    }
+
+                    handle: Rectangle {
+                        id: circleSlide_zoomSlider
+                        x: zoomSlider.leftPadding + zoomSlider.availableWidth / 2 - width / 2
+                        y: zoomSlider.topPadding + zoomSlider.visualPosition * (zoomSlider.availableHeight - height)
+                        implicitWidth: 26
+                        implicitHeight: 26
+                        radius: 13
+                        color: zoomSlider.pressed ? "#f0f0f0" : "#f6f6f6"
+                        border.color: "#bdbebf"
+                    }
+
                     onValueChanged: {
-                            containerRow.mapSource.zoomLevel = value
+                        containerRow.mapSource.zoomLevel = value
                     }
                 }
+
+                // Slider {
+                //     id: bearingSlider
+                //     height: parent.height
+                //     from: 0
+                //     to: 360
+                //     orientation : Qt.Vertical
+                //     value: containerRow.mapSource.bearing
+                //     onValueChanged: {
+                //         containerRow.mapSource.bearing = value;
+                //     }
+                // }
+
                 Slider {
                     id: bearingSlider
-                    height: parent.height
+                    orientation: Qt.Vertical // Устанавливаем вертикальную ориентацию
+                    value: containerRow.mapSource.bearing
                     from: 0
                     to: 360
-                    orientation : Qt.Vertical
-                    value: containerRow.mapSource.bearing
+
+                    // Остальные свойства слайдера остаются без изменений
+
+                    background: Rectangle {
+                        anchors.horizontalCenter: circleSlide_bearingSlider.horizontalCenter
+                        implicitHeight: sliderRow.height // Изменяем высоту фона ориентируясь на вашу задачу
+                        height: implicitHeight
+                        width: 4
+                        radius: 2
+                        color: "black"
+
+                        Rectangle {
+                            width: 4
+                            height: bearingSlider.visualPosition * parent.height
+                            color: "lightgray"
+                            radius: 2
+                        }
+                    }
+
+                    handle: Rectangle {
+                        id: circleSlide_bearingSlider
+                        x: bearingSlider.leftPadding + bearingSlider.availableWidth / 2 - width / 2
+                        y: bearingSlider.topPadding + bearingSlider.visualPosition * (bearingSlider.availableHeight - height)
+                        implicitWidth: 26
+                        implicitHeight: 26
+                        radius: 13
+                        color: bearingSlider.pressed ? "#f0f0f0" : "#f6f6f6"
+                        border.color: "#bdbebf"
+                    }
+
                     onValueChanged: {
                         containerRow.mapSource.bearing = value;
                     }
                 }
+
+
+                // Slider {
+                //     id: tiltSlider
+                //     height: parent.height
+                //     orientation : Qt.Vertical
+                //     from: containerRow.mapSource.minimumTilt;
+                //     to: containerRow.mapSource.maximumTilt
+                //     value: containerRow.mapSource.tilt
+                //     onValueChanged: {
+                //         containerRow.mapSource.tilt = value;
+                //     }
+
+                // }
+
                 Slider {
                     id: tiltSlider
-                    height: parent.height
-                    orientation : Qt.Vertical
+                    orientation: Qt.Vertical // Устанавливаем вертикальную ориентацию
                     from: containerRow.mapSource.minimumTilt;
                     to: containerRow.mapSource.maximumTilt
                     value: containerRow.mapSource.tilt
+
+                    // Остальные свойства слайдера остаются без изменений
+
+                    background: Rectangle {
+                        anchors.horizontalCenter: circleSlide_tiltSlider.horizontalCenter
+                        implicitHeight: sliderRow.height // Изменяем высоту фона ориентируясь на вашу задачу
+                        height: implicitHeight
+                        width: 4
+                        radius: 2
+                        color: "black"
+
+                        Rectangle {
+                            width: 4
+                            height: tiltSlider.visualPosition * parent.height
+                            color: "lightgray"
+                            radius: 2
+                        }
+                    }
+
+                    handle: Rectangle {
+                        id: circleSlide_tiltSlider
+                        x: tiltSlider.leftPadding + tiltSlider.availableWidth / 2 - width / 2
+                        y: tiltSlider.topPadding + tiltSlider.visualPosition * (tiltSlider.availableHeight - height)
+                        implicitWidth: 26
+                        implicitHeight: 26
+                        radius: 13
+                        color: tiltSlider.pressed ? "#f0f0f0" : "#f6f6f6"
+                        border.color: "#bdbebf"
+                    }
+
                     onValueChanged: {
                         containerRow.mapSource.tilt = value;
                     }
                 }
+
             //} // Row sliders
 
             // // The labels row
