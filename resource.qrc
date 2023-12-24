@@ -65,5 +65,8 @@
         <file>ui/sun.png</file>
         <file>ui/menu.png</file>
         <file>ui/font.ttf</file>
+        <file>MapFile.qml</file>
+        <file>RouteCoordinate.qml</file>
+        <file>RouteCoordinateForm.ui.qml</file>
     </qresource>
 </RCC>
