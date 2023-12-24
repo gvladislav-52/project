@@ -82,7 +82,10 @@ void headerMap::temperatureSlot()
 
 QString headerMap::temperature() const
 {
-    return m_temperature;
+    if(m_temperature == "-0")
+        return "0";
+    else
+        return m_temperature;
 }
 
 void headerMap::settemperature(const QString &newTemperature)

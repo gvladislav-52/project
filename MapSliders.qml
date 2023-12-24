@@ -20,6 +20,7 @@ Row {
     layoutDirection: rightEdge() ? Qt.LeftToRight : Qt.RightToLeft
     anchors.top: parent.top
     anchors.bottom: parent.bottom
+    anchors.rightMargin: parent.width/100
     anchors.right: rightEdge() ? parent.right : undefined
     anchors.left: rightEdge() ? undefined : parent.left
 
@@ -29,12 +30,18 @@ Row {
             source: "qrc:/ui/menu.png"
             fillMode: Image.PreserveAspectFit
         }
-        width: 56
-        height: 56
+        width: containerRow.height/15
+        height: containerRow.height/15
         checkable: true
         anchors.top: parent.verticalCenter
         anchors.topMargin: -parent.height *0.45
 
+        background: Rectangle {
+                color: "transparent"
+                border.color: sliderToggler.checked ? "black" : "transparent"
+                border.width: 4
+                radius: 10
+        }
     }
 
     Rectangle {
@@ -51,13 +58,30 @@ Row {
         //property var labelBorderColor: "red"
         property var slidersHeight : sliderContainer.height
 
+        FontLoader {
+            id: palaceScriptFont
+            source: "qrc:/ui/font.ttf"
+        }
+
+        Text {
+            id: textSetting
+            text: "Setting"
+            font.pixelSize: sliderContainer.width * 0.12
+            color: "black"
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: parent.top
+            anchors.topMargin: parent.height * 0.04
+            font.bold: true
+            font.family: palaceScriptFont.name
+        }
+
             Row {
                 id: sliderRow
                 height: sliderContainer.slidersHeight-40
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
-                anchors.top: parent.top
-                anchors.topMargin: parent.height * 0.09
+                anchors.top: textSetting.top
+                anchors.topMargin: textSetting.height
                 spacing: parent.width/5
 
                 Slider {
@@ -93,10 +117,40 @@ Row {
                         radius: 13
                         color: zoomSlider.pressed ? "#f0f0f0" : "#f6f6f6"
                         border.color: "#bdbebf"
+                        Rectangle
+                        {
+                            id: textRectangle_zoomSlider
+                            width: 25
+                            height: 25
+                            color: "lightgray"
+                            anchors.right: circleSlide_zoomSlider.left
+                            anchors.rightMargin:  10
+                            radius: 4
+                            border.color:  "black"
+                            border.width: 2
+                            Text
+                            {
+                                anchors.horizontalCenter: textRectangle_zoomSlider.horizontalCenter
+                                anchors.verticalCenter: textRectangle_zoomSlider.verticalCenter
+                                text: Math.round(zoomSlider.value)
+                                font.pixelSize: 12
+                                color: "black"
+                            }
+                        }
                     }
 
                     onValueChanged: {
                         containerRow.mapSource.zoomLevel = value
+                    }
+
+                    Text {
+                        anchors.top: zoomSlider.bottom
+                        text: "Zoom"
+                        font.pixelSize: sliderContainer.width * 0.06
+                        color: "black"
+                        horizontalAlignment: Text.AlignHCenter
+                        anchors.horizontalCenter: zoomSlider.horizontalCenter
+                        font.bold: true
                     }
                 }
 
@@ -146,26 +200,43 @@ Row {
                         radius: 13
                         color: bearingSlider.pressed ? "#f0f0f0" : "#f6f6f6"
                         border.color: "#bdbebf"
+
+                        Rectangle
+                        {
+                            id: textRectangle_bearingSlider
+                            width: 25
+                            height: 25
+                            color: "lightgray"
+                            anchors.right: circleSlide_bearingSlider.left
+                            anchors.rightMargin:  10
+                            radius: 4
+                            border.color:  "black"
+                            border.width: 2
+                            Text
+                            {
+                                anchors.horizontalCenter: textRectangle_bearingSlider.horizontalCenter
+                                anchors.verticalCenter: textRectangle_bearingSlider.verticalCenter
+                                text: Math.round(bearingSlider.value/18)
+                                font.pixelSize: 12
+                                color: "black"
+                            }
+                        }
                     }
 
                     onValueChanged: {
                         containerRow.mapSource.bearing = value;
                     }
+
+                    Text {
+                        anchors.top: bearingSlider.bottom
+                        text: "Rotate"
+                        font.pixelSize: sliderContainer.width * 0.06
+                        color: "black"
+                        horizontalAlignment: Text.AlignHCenter
+                        anchors.horizontalCenter: bearingSlider.horizontalCenter
+                        font.bold: true
+                    }
                 }
-
-
-                // Slider {
-                //     id: tiltSlider
-                //     height: parent.height
-                //     orientation : Qt.Vertical
-                //     from: containerRow.mapSource.minimumTilt;
-                //     to: containerRow.mapSource.maximumTilt
-                //     value: containerRow.mapSource.tilt
-                //     onValueChanged: {
-                //         containerRow.mapSource.tilt = value;
-                //     }
-
-                // }
 
                 Slider {
                     id: tiltSlider
@@ -201,77 +272,44 @@ Row {
                         radius: 13
                         color: tiltSlider.pressed ? "#f0f0f0" : "#f6f6f6"
                         border.color: "#bdbebf"
+
+                        Rectangle
+                        {
+                            id: textRectangle_tiltSlider
+                            width: 25
+                            height: 25
+                            color: "lightgray"
+                            anchors.right: circleSlide_tiltSlider.left
+                            anchors.rightMargin:  10
+                            radius: 4
+                            border.color:  "black"
+                            border.width: 2
+                            Text
+                            {
+                                anchors.horizontalCenter: textRectangle_tiltSlider.horizontalCenter
+                                anchors.verticalCenter: textRectangle_tiltSlider.verticalCenter
+                                text: Math.round(tiltSlider.value/4)
+                                font.pixelSize: 12
+                                color: "black"
+                            }
+                        }
                     }
 
                     onValueChanged: {
                         containerRow.mapSource.tilt = value;
                     }
+
+                    Text {
+                        anchors.top: tiltSlider.bottom
+                        //anchors.topMargin: 5
+                        text: "Angle"
+                        font.pixelSize: sliderContainer.width * 0.06
+                        color: "black"
+                        horizontalAlignment: Text.AlignHCenter
+                        anchors.horizontalCenter: tiltSlider.horizontalCenter
+                        font.bold: true
+                    }
                 }
-
-            //} // Row sliders
-
-            // // The labels row
-            // Row {
-            //     id: rowSliderLabels
-            //     spacing: sliderRow.spacing
-            //     width: sliderRow.width
-            //     property real entryWidth: zoomSlider.width
-            //     property real entryHeight: 64
-
-            //     Rectangle{
-            //         color: labelBackground
-            //         height: parent.entryHeight
-            //         width: parent.entryWidth
-            //         border.color: sliderContainer.labelBorderColor
-            //         Label {
-            //             id: labelZoom
-            //             text: "Zoom"
-            //             font.pixelSize: fontSize
-            //             rotation: -90
-            //             anchors.centerIn: parent
-            //         }
-            //     }
-
-            //     Rectangle{
-            //         color: labelBackground
-            //         height: parent.entryHeight
-            //         width: parent.entryWidth
-            //         border.color: sliderContainer.labelBorderColor
-            //         Label {
-            //             id: labelBearing
-            //             text: "Bearing"
-            //             font.pixelSize: fontSize
-            //             rotation: -90
-            //             anchors.centerIn: parent
-            //         }
-            //     }
-            //     Rectangle{
-            //         color: labelBackground
-            //         height: parent.entryHeight
-            //         width: parent.entryWidth
-            //         border.color: sliderContainer.labelBorderColor
-            //         Label {
-            //             id: labelTilt
-            //             text: "Tilt"
-            //             font.pixelSize: fontSize
-            //             rotation: -90
-            //             anchors.centerIn: parent
-            //         }
-            //     }
-            //     Rectangle{
-            //         color: labelBackground
-            //         height: parent.entryHeight
-            //         width: parent.entryWidth
-            //         border.color: sliderContainer.labelBorderColor
-            //         Label {
-            //             id: labelFov
-            //             text: "FoV"
-            //             font.pixelSize: fontSize
-            //             rotation: -90
-            //             anchors.centerIn: parent
-            //         }
-            //     }
-            // } // rowSliderLabels
         } // Column
     } // sliderContainer
 } // containerRow

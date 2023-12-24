@@ -64,5 +64,6 @@
         <file>ui/15810.png</file>
         <file>ui/sun.png</file>
         <file>ui/menu.png</file>
+        <file>ui/font.ttf</file>
     </qresource>
 </RCC>
