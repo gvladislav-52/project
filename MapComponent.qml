@@ -269,7 +269,6 @@ MapView {
     }
 
     MapQuickItem {
-        id: itsyou
         parent: view.map
         sourceItem: Text{
             text: "The Qt Company"
@@ -286,7 +285,7 @@ MapView {
         id: sliders
         z: view.map.z + 3
         mapSource: map
-        edge: Qt.LeftEdge
+        edge: Qt.RightEdge
     }
 
     Item {
@@ -360,7 +359,7 @@ MapView {
         MapRoute {
             id: route
             route: routeData
-            line.color: "#46a2da"
+            line.color: "blue"
             line.width: 5
             smooth: true
             opacity: 0.8
