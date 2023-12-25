@@ -4,7 +4,7 @@ Rectangle {
     id: headerMap
     anchors.top: parent.top
     width: parent.width
-    height: redittext.height
+    height: parent.height/25
     color: "lightgray"
     opacity: 0.95
 
@@ -13,7 +13,7 @@ Rectangle {
         text: header_temp_qml.currentTime
         color: "black"
         font.bold: true
-        font.pixelSize: parent.width * 0.02
+        font.pixelSize: headerMap.height/1.5
         anchors.right: parent.right
         anchors.verticalCenter: headerMap.verticalCenter
         anchors.rightMargin: 10
@@ -24,7 +24,7 @@ Rectangle {
         text: header_temp_qml.temperature + "°C"
         color: "black"
         font.bold: true
-        font.pixelSize: parent.width * 0.02
+        font.pixelSize: headerMap.height/1.5
         anchors.left: redittext.horizontalCenter
         anchors.leftMargin: -parent.width * 0.15
         anchors.verticalCenter: headerMap.verticalCenter
@@ -35,7 +35,7 @@ Rectangle {
         text: qsTr("Vladislav");
         color: "black"
         font.bold: true
-        font.pixelSize: parent.width * 0.02
+        font.pixelSize: headerMap.height/1.5
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: headerMap.verticalCenter
     }
@@ -75,7 +75,7 @@ Rectangle {
         text: footer_temp_qml.soundTemp
         color: "black"
         font.bold: true
-        font.pixelSize: parent.width * 0.02
+        font.pixelSize: headerMap.height/1.5
         anchors.left: imageSoundHeader.right
         anchors.leftMargin: parent.width*0.003
         anchors.verticalCenter: headerMap.verticalCenter

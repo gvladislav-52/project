@@ -167,11 +167,54 @@ support"
 
             Button
             {
-                text: qsTr("Route with coordinates")
                 enabled: plugin ? plugin.supportsRouting() : false
                 onClicked: selectTool("CoordinateRoute")
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.verticalCenter: parent.verticalCenter
+                anchors.left: searchRectangle.right
+                anchors.leftMargin: searchRectangle.width/20
+                anchors.verticalCenter: searchRectangle.verticalCenter
+                width: searchRectangle.width/2
+                height: searchRectangle.height
+
+                background: Rectangle {
+                        color: "green"
+                        radius: 4
+                        Text {
+                            id: textButton
+                            text: qsTr("Enter")
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            anchors.verticalCenter: parent.verticalCenter
+                            font.pixelSize: parent.height/2
+                            color: "white"
+                        }
+                        border.color: "black"
+                        border.width: 1
+                    }
+
+
+            }
+
+            Rectangle
+            {
+                id: searchRectangle
+                color: "white"
+                width: appWindow.width/4
+                height: appWindow.height/15
+                anchors.top: parent.top
+                anchors.topMargin: parent.height/20
+                anchors.left: parent.left
+                anchors.leftMargin: parent.width/15
+                radius: 4
+                border.color: "black"
+                border.width: 1
+
+                Text {
+                    id: textSearch
+                    text: qsTr("Search...")
+                    anchors.left: parent.left
+                    anchors.leftMargin: parent.width/20
+                    anchors.verticalCenter: parent.verticalCenter
+                    font.pixelSize: parent.height/3
+                }
             }
         }
     }

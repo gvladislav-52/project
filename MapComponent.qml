@@ -271,7 +271,7 @@ MapView {
     MapQuickItem {
         parent: view.map
         sourceItem: Text{
-            text: "The Qt Company"
+            text: "Vladislav"
             color:"#242424"
             font.bold: true
             styleColor: "#ECECEC"
