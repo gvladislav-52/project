@@ -17,6 +17,7 @@ Item {
     property variant fromCoordinate: QtPositioning.coordinate(56.307706, 43.984085)
     property variant toCoordinate: QtPositioning.coordinate(55.320688, 42.167970)
     signal showRoute(variant startCoordinate,variant endCoordinate)
+
     function initializeProviders(provider1)
     {
         var provider = "osm"
@@ -29,62 +30,32 @@ Item {
         mapview.map.plugin = plugin;
     }
 
-    PositionSource {
-        id: positionSource
-        property variant lastSearchPosition: QtPositioning.coordinate(56.326802, 44.006506) //Initialized/Fallback to Oslo
-        active: true
-        updateInterval: 120000 // 2 mins
-        onPositionChanged:  {
-            var distance = lastSearchPosition.distanceTo(position.coordinate)
-            if (distance > 500) {
-                lastSearchPosition = positionSource.position.coordinate
-            }
-        }
-    }
-
-    Address {
-        id :fromAddress
-        street: "Sandakerveien 116"
-        city: "Oslo"
-        country: "Norway"
-        state : ""
-        postalCode: "0484"
-    }
-    //! [geocode0]
-
-    Address {
-        id: toAddress
-        street: "Holmenkollveien 140"
-        city: "Oslo"
-        country: "Norway"
-        postalCode: "0791"
-    }
-    PlaceSearchModel
-    {
-        id: searchModel
-        searchTerm: "food"
-        searchArea: QtPositioning.circle(positionSource.lastSearchPosition, 1000)
-        Component.onCompleted: update()
-    }
 
     height: parent.height
     width: parent.width
     visible: true
 
+     Address {
+        id :fromAddress
+         street: "проспект Гагарина, 1"
+         city:   "Нижний Новгород"
+     }
+    // //! [geocode0]
+
+     Address {
+         id: toAddress
+         street: "Бекетова 29"
+         city: "Нижний Новгород"
+    }
+
     onSelectTool: (tool) => {
         switch (tool) {
         case "AddressRoute":
-            stackView.pop({item:page, immediate: true})
+            //stackView.pop({item:page, immediate: true})
                           tempGeocodeModel.reset()
-                          fromAddress.country =  "Россия"
-                          fromAddress.street = "проспект Гагарина, 1"
-                          fromAddress.city =  "Нижний Новгород"
-                          toAddress.country = "Россия"
-                          toAddress.street = "Бекетова, 25"
-                          toAddress.city = "Москва"
-                          tempGeocodeModel.startCoordinate = QtPositioning.coordinate()
+                          //tempGeocodeModel.startCoordinate = QtPositioning.coordinate()
                           tempGeocodeModel.endCoordinate = QtPositioning.coordinate()
-                          tempGeocodeModel.query = fromAddress
+                          tempGeocodeModel.query = toAddress
                           tempGeocodeModel.update();
                           //goButton.enabled = false;
             showRoute.connect(mapview.calculateCoordinateRoute)
@@ -107,32 +78,32 @@ Item {
     GeocodeModel {
         id: tempGeocodeModel
         plugin: mapview.map.plugin
-        property int success: 0
+        //property int success: 0
         property variant startCoordinate
         property variant endCoordinate
 
-        onCountChanged: {
-            if (success == 1 && count == 1) {
-                query = toAddress
-                update();
-            }
-        }
+        // onCountChanged: {
+        //     if (success == 1 && count == 1) {
+        //         query = toAddress
+        //         update();
+        //     }
+        // }
 
         onStatusChanged: {
-            if ((status == GeocodeModel.Ready) && (count == 1)) {
-                success++
-                if (success == 1) {
-                    startCoordinate.latitude = get(0).coordinate.latitude
-                    startCoordinate.longitude = get(0).coordinate.longitude
-                }
-                if (success == 2) {
+            //if ((status == GeocodeModel.Ready) && (count == 1)) {
+            //     success++
+                // if (success == 1) {
+                //     startCoordinate.latitude = get(0).coordinate.latitude
+                //     startCoordinate.longitude = get(0).coordinate.longitude
+                // }
+                //if (success == 2) {
                     endCoordinate.latitude = get(0).coordinate.latitude
                     endCoordinate.longitude = get(0).coordinate.longitude
-                    success = 0
-                    if (startCoordinate.isValid && endCoordinate.isValid)
-                        showRoute(startCoordinate,endCoordinate)
-                }
-            }
+                    //success = 0
+                    // if (startCoordinate.isValid && endCoordinate.isValid)
+                        showRoute(fromCoordinate,endCoordinate)
+            //     }
+           // }
         }
     }
 
