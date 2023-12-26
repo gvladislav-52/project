@@ -35,17 +35,19 @@ Item {
     width: parent.width
     visible: true
 
-     Address {
-        id :fromAddress
-         street: "проспект Гагарина, 1"
-         city:   "Нижний Новгород"
-     }
+     // Address {
+     //    id :fromAddress
+     //     street: "проспект Гагарина, 1"
+     //     city:   "Нижний Новгород"
+     // }
     // //! [geocode0]
 
      Address {
          id: toAddress
-         street: "Бекетова 29"
-         city: "Нижний Новгород"
+         //street: "Зеленая 2"
+         //"Ковров Маяковского 6"
+         //Выкса Ближне-Песочное Зеленая 2
+         city: "Пыщуг Луговая 3"
     }
 
     onSelectTool: (tool) => {
