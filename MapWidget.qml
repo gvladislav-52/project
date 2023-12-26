@@ -8,6 +8,7 @@ import QtPositioning
 
 Item {
     id: appWindow
+    property string tempText: textSearch.text
     signal selectTool(string tool);
      property variant mapview
      property variant plugin
@@ -15,7 +16,7 @@ Item {
     property variant coordinateYou
     property variant fromCoordinate: QtPositioning.coordinate(56.307706, 43.984085)
     property variant toCoordinate: QtPositioning.coordinate(55.320688, 42.167970)
-
+    signal showRoute(variant startCoordinate,variant endCoordinate)
     function initializeProviders(provider1)
     {
         var provider = "osm"
@@ -41,6 +42,23 @@ Item {
         }
     }
 
+    Address {
+        id :fromAddress
+        street: "Sandakerveien 116"
+        city: "Oslo"
+        country: "Norway"
+        state : ""
+        postalCode: "0484"
+    }
+    //! [geocode0]
+
+    Address {
+        id: toAddress
+        street: "Holmenkollveien 140"
+        city: "Oslo"
+        country: "Norway"
+        postalCode: "0791"
+    }
     PlaceSearchModel
     {
         id: searchModel
@@ -55,16 +73,66 @@ Item {
 
     onSelectTool: (tool) => {
         switch (tool) {
+        case "AddressRoute":
+            stackView.pop({item:page, immediate: true})
+                          tempGeocodeModel.reset()
+                          fromAddress.country =  "Россия"
+                          fromAddress.street = "проспект Гагарина, 1"
+                          fromAddress.city =  "Нижний Новгород"
+                          toAddress.country = "Россия"
+                          toAddress.street = "Бекетова, 25"
+                          toAddress.city = "Москва"
+                          tempGeocodeModel.startCoordinate = QtPositioning.coordinate()
+                          tempGeocodeModel.endCoordinate = QtPositioning.coordinate()
+                          tempGeocodeModel.query = fromAddress
+                          tempGeocodeModel.update();
+                          //goButton.enabled = false;
+            showRoute.connect(mapview.calculateCoordinateRoute)
+            //stackView.currentItem.showMessage.connect(stackView.showMessage)
+            //stackView.currentItem.closeForm.connect(stackView.closeForm)
+            break
         case "CoordinateRoute":
             stackView.pop({item:page, immediate: true})
             // stackView.push("qrc:/RouteCoordinateForm.ui.qml" ,
             //                     { "toCoordinate": toCoordinate,
             //                        "fromCoordinate": fromCoordinate})
-            mapview.calculateCoordinateRoute(toCoordinate,fromCoordinate)
+            mapview.calculateCoordinateRoute(fromCoordinate,toCoordinate)
             //stackView.currentItem.closeForm.connect(stackView.closeForm)
             break
         default:
         console.log("Unsupported operation")
+        }
+    }
+
+    GeocodeModel {
+        id: tempGeocodeModel
+        plugin: mapview.map.plugin
+        property int success: 0
+        property variant startCoordinate
+        property variant endCoordinate
+
+        onCountChanged: {
+            if (success == 1 && count == 1) {
+                query = toAddress
+                update();
+            }
+        }
+
+        onStatusChanged: {
+            if ((status == GeocodeModel.Ready) && (count == 1)) {
+                success++
+                if (success == 1) {
+                    startCoordinate.latitude = get(0).coordinate.latitude
+                    startCoordinate.longitude = get(0).coordinate.longitude
+                }
+                if (success == 2) {
+                    endCoordinate.latitude = get(0).coordinate.latitude
+                    endCoordinate.longitude = get(0).coordinate.longitude
+                    success = 0
+                    if (startCoordinate.isValid && endCoordinate.isValid)
+                        showRoute(startCoordinate,endCoordinate)
+                }
+            }
         }
     }
 
@@ -168,7 +236,7 @@ support"
             Button
             {
                 enabled: plugin ? plugin.supportsRouting() : false
-                onClicked: selectTool("CoordinateRoute")
+                //onClicked: selectTool("CoordinateRoute")
                 anchors.left: searchRectangle.right
                 anchors.leftMargin: searchRectangle.width/20
                 anchors.verticalCenter: searchRectangle.verticalCenter
@@ -189,12 +257,10 @@ support"
                         border.color: "black"
                         border.width: 1
                     }
-
-
+                onClicked: selectTool("AddressRoute")
             }
 
-            Rectangle
-            {
+            Rectangle {
                 id: searchRectangle
                 color: "white"
                 width: appWindow.width/4
@@ -207,13 +273,15 @@ support"
                 border.color: "black"
                 border.width: 1
 
-                Text {
+                TextInput {
                     id: textSearch
-                    text: qsTr("Search...")
-                    anchors.left: parent.left
-                    anchors.leftMargin: parent.width/20
-                    anchors.verticalCenter: parent.verticalCenter
+                    text: "Oslo"
+                    anchors.fill: parent
+                    verticalAlignment: TextInput.AlignVCenter
+                    horizontalAlignment: TextInput.AlignLeft
                     font.pixelSize: parent.height/3
+                    selectByMouse: true
+                    //selectByKeyboard: true
                 }
             }
         }

@@ -68,5 +68,7 @@
         <file>MapFile.qml</file>
         <file>RouteCoordinate.qml</file>
         <file>RouteCoordinateForm.ui.qml</file>
+        <file>RouteAddress.qml</file>
+        <file>RouteAddressForm.ui.qml</file>
     </qresource>
 </RCC>
