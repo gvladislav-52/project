@@ -1,6 +1,3 @@
-// Copyright (C) 2017 The Qt Company Ltd.
-// SPDX-License-Identifier: LicenseRef-Qt-Commercial OR BSD-3-Clause
-
 import QtQuick
 import QtQuick.Controls
 import QtLocation
@@ -9,7 +6,7 @@ import QtPositioning
 Item {
     id: appWindow
     property string tempText: textSearch.text
-    signal selectTool(string tool);
+    signal selectTool();
      property variant mapview
      property variant plugin
      property variant parameters
@@ -17,6 +14,7 @@ Item {
     property variant fromCoordinate: QtPositioning.coordinate(56.307706, 43.984085)
     property variant toCoordinate: QtPositioning.coordinate(55.320688, 42.167970)
     signal showRoute(variant startCoordinate,variant endCoordinate)
+    property string toCoordinateText
 
     function initializeProviders(provider1)
     {
@@ -30,82 +28,36 @@ Item {
         mapview.map.plugin = plugin;
     }
 
-
     height: parent.height
     width: parent.width
     visible: true
-
-     // Address {
-     //    id :fromAddress
-     //     street: "проспект Гагарина, 1"
-     //     city:   "Нижний Новгород"
-     // }
-    // //! [geocode0]
 
      Address {
          id: toAddress
          //street: "Зеленая 2"
          //"Ковров Маяковского 6"
          //Выкса Ближне-Песочное Зеленая 2
-         city: "Пыщуг Луговая 3"
+         //Пыщуг Луговая 3
+         city: toCoordinateText
     }
 
-    onSelectTool: (tool) => {
-        switch (tool) {
-        case "AddressRoute":
-            //stackView.pop({item:page, immediate: true})
-                          tempGeocodeModel.reset()
-                          //tempGeocodeModel.startCoordinate = QtPositioning.coordinate()
-                          tempGeocodeModel.endCoordinate = QtPositioning.coordinate()
-                          tempGeocodeModel.query = toAddress
-                          tempGeocodeModel.update();
-                          //goButton.enabled = false;
-            showRoute.connect(mapview.calculateCoordinateRoute)
-            //stackView.currentItem.showMessage.connect(stackView.showMessage)
-            //stackView.currentItem.closeForm.connect(stackView.closeForm)
-            break
-        case "CoordinateRoute":
-            stackView.pop({item:page, immediate: true})
-            // stackView.push("qrc:/RouteCoordinateForm.ui.qml" ,
-            //                     { "toCoordinate": toCoordinate,
-            //                        "fromCoordinate": fromCoordinate})
-            mapview.calculateCoordinateRoute(fromCoordinate,toCoordinate)
-            //stackView.currentItem.closeForm.connect(stackView.closeForm)
-            break
-        default:
-        console.log("Unsupported operation")
-        }
+    onSelectTool: {
+        tempGeocodeModel.reset()
+        tempGeocodeModel.endCoordinate = QtPositioning.coordinate()
+        tempGeocodeModel.query = toAddress
+        tempGeocodeModel.update();
+        showRoute.connect(mapview.calculateCoordinateRoute)
     }
 
     GeocodeModel {
         id: tempGeocodeModel
         plugin: mapview.map.plugin
-        //property int success: 0
-        property variant startCoordinate
         property variant endCoordinate
 
-        // onCountChanged: {
-        //     if (success == 1 && count == 1) {
-        //         query = toAddress
-        //         update();
-        //     }
-        // }
-
         onStatusChanged: {
-            //if ((status == GeocodeModel.Ready) && (count == 1)) {
-            //     success++
-                // if (success == 1) {
-                //     startCoordinate.latitude = get(0).coordinate.latitude
-                //     startCoordinate.longitude = get(0).coordinate.longitude
-                // }
-                //if (success == 2) {
-                    endCoordinate.latitude = get(0).coordinate.latitude
-                    endCoordinate.longitude = get(0).coordinate.longitude
-                    //success = 0
-                    // if (startCoordinate.isValid && endCoordinate.isValid)
-                        showRoute(fromCoordinate,endCoordinate)
-            //     }
-           // }
+            endCoordinate.latitude = get(0).coordinate.latitude
+            endCoordinate.longitude = get(0).coordinate.longitude
+            showRoute(fromCoordinate,endCoordinate)
         }
     }
 
@@ -129,38 +81,7 @@ support"
                 z: 12
             }
         }
-
-        // function showMessage(title,message,backPage)
-        // {
-        //     push("forms/Message.qml",
-        //                        {
-        //                            "title" : title,
-        //                            "message" : message,
-        //                            "backPage" : backPage
-        //                        })
-        //     currentItem.closeForm.connect(closeMessage)
-        // }
-
-        // function closeMessage(backPage)
-        // {
-        //     pop(backPage)
-        // }
-
-        // function closeForm()
-        // {
-        //     pop(page)
-        // }
-
-    //     function showRouteListPage()
-    //     {
-    //         push("forms/RouteList.qml",
-    //                            {
-    //                                "routeModel" : mapview.routeModel
-    //                            })
-    //         currentItem.closeForm.connect(closeForm)
-    //     }
      }
-
 
     Component {
         id: mapComponent
@@ -172,11 +93,6 @@ support"
             map.center: fromCoordinate
             map.zoomLevel: (maximumZoomLevel - minimumZoomLevel)/2
              map.onSupportedMapTypesChanged: mainMenu.mapTypeMenu.createMenu(map)
-
-            // TapHandler {
-            //     onTapped: {
-            //     }
-            // }
 
             Image {
                 id: mapSunSet
@@ -206,55 +122,71 @@ support"
                 }
             }
 
-            Button
-            {
-                enabled: plugin ? plugin.supportsRouting() : false
-                //onClicked: selectTool("CoordinateRoute")
-                anchors.left: searchRectangle.right
-                anchors.leftMargin: searchRectangle.width/20
-                anchors.verticalCenter: searchRectangle.verticalCenter
-                width: searchRectangle.width/2
-                height: searchRectangle.height
-
-                background: Rectangle {
-                        color: "green"
-                        radius: 4
-                        Text {
-                            id: textButton
-                            text: qsTr("Enter")
-                            anchors.horizontalCenter: parent.horizontalCenter
-                            anchors.verticalCenter: parent.verticalCenter
-                            font.pixelSize: parent.height/2
-                            color: "white"
-                        }
-                        border.color: "black"
-                        border.width: 1
-                    }
-                onClicked: selectTool("AddressRoute")
-            }
-
             Rectangle {
                 id: searchRectangle
                 color: "white"
-                width: appWindow.width/4
-                height: appWindow.height/15
+                width: appWindow.width / 4
+                height: appWindow.height / 15
                 anchors.top: parent.top
-                anchors.topMargin: parent.height/20
+                anchors.topMargin: parent.height / 20
                 anchors.left: parent.left
-                anchors.leftMargin: parent.width/15
+                anchors.leftMargin: parent.width / 15
                 radius: 4
                 border.color: "black"
                 border.width: 1
+                clip: true
 
                 TextInput {
                     id: textSearch
-                    text: "Oslo"
-                    anchors.fill: parent
+                    text: "Search..."
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        left: parent.left
+                        leftMargin: 5
+                    }
+                    width: parent.width - 10
                     verticalAlignment: TextInput.AlignVCenter
                     horizontalAlignment: TextInput.AlignLeft
-                    font.pixelSize: parent.height/3
+                    font.pixelSize: parent.height / 3
                     selectByMouse: true
-                    //selectByKeyboard: true
+
+                    Keys.onReturnPressed: {
+                        toCoordinateText = textSearch.text
+                        selectTool()
+                    }
+
+                    onActiveFocusChanged: {
+                        if (activeFocus) {
+                            textSearch.text = ""
+                        }
+                    }
+                }
+            }
+
+            Button {
+                enabled: plugin ? plugin.supportsRouting() : false
+                anchors.left: searchRectangle.right
+                anchors.leftMargin: searchRectangle.width / 20
+                anchors.verticalCenter: searchRectangle.verticalCenter
+                width: searchRectangle.width / 2
+                height: searchRectangle.height
+                background: Rectangle {
+                    color: "green"
+                    radius: 4
+                    Text {
+                        id: textButton
+                        text: qsTr("Enter")
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        anchors.verticalCenter: parent.verticalCenter
+                        font.pixelSize: parent.height / 2
+                        color: "white"
+                    }
+                    border.color: "black"
+                    border.width: 1
+                }
+                onClicked: {
+                    toCoordinateText = textSearch.text
+                    selectTool()
                 }
             }
         }

@@ -82,9 +82,9 @@ MapView {
             }
         }
 
-        text = Helper.formatDistance(dist)
-        scaleImage.width = (scaleImage.sourceSize.width * f) - 2 * scaleImageLeft.sourceSize.width
-        scaleText.text = text
+        //text = Helper.formatDistance(dist)
+        //scaleImage.width = (scaleImage.sourceSize.width * f) - 2 * scaleImageLeft.sourceSize.width
+        //scaleText.text = text
     }
 
     function deleteMarkers()
