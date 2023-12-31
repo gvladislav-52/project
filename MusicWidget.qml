@@ -8,7 +8,7 @@ Item {
         anchors.bottom: parent.bottom
         width: parent.width
         anchors.bottomMargin: 5
-        height: 0.15*parent.height
+        height: 0.2*parent.height
         color: "lightgray"
         opacity: 0.95
     }

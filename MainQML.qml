@@ -3,10 +3,10 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 
 Window {
-    width: 1024
-    height: 680
+    minimumWidth: 1135
+    minimumHeight: 747
     visible: true
-    title: qsTr("Hello World")
+    title: qsTr("Tesla Application by VG")
 
     ColumnLayout {
         anchors.fill: parent

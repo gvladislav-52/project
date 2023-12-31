@@ -47,6 +47,7 @@ Item {
         tempGeocodeModel.query = toAddress
         tempGeocodeModel.update();
         showRoute.connect(mapview.calculateCoordinateRoute)
+
     }
 
     GeocodeModel {
@@ -81,7 +82,7 @@ support"
                 z: 12
             }
         }
-     }
+    }
 
     Component {
         id: mapComponent
@@ -119,6 +120,31 @@ support"
                         else
                             mainMenu.mapTypeMenu.createMenu(map,3)
                     }
+                }
+            }
+
+
+            ToolButton {
+                id: naviButton
+                contentItem: Image {
+                    source: "qrc:/ui/navi.png"
+                    fillMode: Image.PreserveAspectFit
+                }
+                anchors.top: mapSunSet.bottom
+                anchors.topMargin: parent.height/20
+                anchors.horizontalCenter: mapSunSet.horizontalCenter
+                width: parent.width/20
+                height: parent.height/15
+                hoverEnabled: false
+
+                background: Rectangle {
+                    color: naviButton.pressed ? "lightgray" : "transparent"
+                    radius: 10
+                }
+                onClicked:
+                {
+                    mapview_comp.map.center= fromCoordinate
+                    mapview_comp.map.zoomLevel = 16
                 }
             }
 

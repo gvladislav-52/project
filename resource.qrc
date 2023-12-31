@@ -66,5 +66,13 @@
         <file>ui/menu.png</file>
         <file>ui/font.ttf</file>
         <file>MapFile.qml</file>
+        <file>ui/navi.png</file>
+        <file>ui/carDetails/BottomCar.png</file>
+        <file>ui/carDetails/LeftBottomCar.png</file>
+        <file>ui/carDetails/LeftTopCar.png</file>
+        <file>ui/carDetails/RightBottomCar.png</file>
+        <file>ui/carDetails/RightTopCar.png</file>
+        <file>ui/carDetails/TopCar.png</file>
+        <file>ui/test.png</file>
     </qresource>
 </RCC>

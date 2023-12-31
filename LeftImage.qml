@@ -6,10 +6,45 @@ Item {
     height: 616
 
     Image {
+        id: asd
         source: "qrc:/ui/carUp2.png"
-        anchors.fill: parent
+        width: 200
+        height: 400
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
         fillMode: Image.PreserveAspectFit
+
+        Image {
+            id: carImage
+            source: "qrc:/ui/test.png"
+            width: asd.width/5
+            height: asd.height/5
+            anchors.left: asd.horizontalCenter
+            anchors.leftMargin: 30
+            anchors.bottom: asd.verticalCenter
+            anchors.bottomMargin: -23
+            fillMode: Image.PreserveAspectFit
+            transformOrigin: Item.Top
+            SequentialAnimation on rotation {
+                    id: doorOpenAnimation
+                    running: false
+                    PropertyAnimation { target: carImage; property: "rotation"; to: -40; duration: 500 }
+                }
+            SequentialAnimation on rotation {
+                    id: revdoorOpenAnimation
+                    running: false
+                    PropertyAnimation { target: carImage; property: "rotation"; to: 0; duration: 500 }
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        doorOpenAnimation.running = true
+                    }
+                }
+        }
     }
+
 
     Button
     {
@@ -20,6 +55,9 @@ Item {
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 25
         opacity: 0.5
+        onClicked: {
+            revdoorOpenAnimation.running = true
+        }
     }
 
     Button
@@ -46,6 +84,7 @@ Item {
 
     Button {
         text: "RightUp"
+        visible: false
         width: parent.width * 0.175
         height: parent.height * 0.2
         anchors.left: parent.horizontalCenter
