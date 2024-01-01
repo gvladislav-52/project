@@ -79,5 +79,7 @@
         <file>ui/LeftDoorBottom.png</file>
         <file>ui/CapotClose.png</file>
         <file>ui/CapotOpen.png</file>
+        <file>ui/CloseBag.png</file>
+        <file>ui/OpenBag.png</file>
     </qresource>
 </RCC>

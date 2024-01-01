@@ -161,6 +161,35 @@ Item {
             anchors.bottomMargin: -5
             visible: false
         }
+
+        Image
+        {
+            id: closeBag
+            source: "qrc:/ui/CloseBag.png"
+            width: asd.width/2.3
+            height: asd.height/2.3
+            fillMode: Image.PreserveAspectFit
+            anchors.left: parent.horizontalCenter
+            anchors.leftMargin: -48
+            anchors.top: parent.verticalCenter
+            anchors.topMargin: 24
+            visible: true
+        }
+
+        Image
+        {
+            id: openBag
+            source: "qrc:/ui/OpenBag.png"
+            width: asd.width/2.3
+            height: asd.height/2.3
+            fillMode: Image.PreserveAspectFit
+            anchors.left: parent.horizontalCenter
+            anchors.leftMargin: -48
+            anchors.top: parent.verticalCenter
+            anchors.topMargin: 12
+            visible: false
+
+        }
     }
 
 
@@ -171,7 +200,7 @@ Item {
         height: parent.height * 0.15
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 25
+        anchors.bottomMargin: -30
         opacity: 0.5
         onClicked: {
             revdoorOpenAnimationRight.running = true
@@ -180,6 +209,8 @@ Item {
             revdoorOpenAnimationRightBottom.running = true
             closeCapot.visible = !closeCapot.visible
             openCapot.visible = !openCapot.visible
+            closeBag.visible = !closeBag.visible
+            openBag.visible = !openBag.visible
         }
     }
 
