@@ -74,5 +74,10 @@
         <file>ui/carDetails/RightTopCar.png</file>
         <file>ui/carDetails/TopCar.png</file>
         <file>ui/test.png</file>
+        <file>ui/leftDoor.png</file>
+        <file>ui/RightDoorBottom.png</file>
+        <file>ui/LeftDoorBottom.png</file>
+        <file>ui/CapotClose.png</file>
+        <file>ui/CapotOpen.png</file>
     </qresource>
 </RCC>
