@@ -5,6 +5,11 @@ Item {
     width: 200
     height: 616
 
+    property bool rightTopDoorCheck: false
+    property bool rightBottomDoorCheck: false
+    property bool leftTopDoorCheck: false
+    property bool leftBottomDoorCheck: false
+
     Image {
         id: asd
         source: "qrc:/ui/carUp2.png"
@@ -65,13 +70,6 @@ Item {
                     running: false
                     PropertyAnimation { target: leftDoor; property: "rotation"; to: 0; duration: 500 }
                 }
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        doorOpenAnimationLeft.running = true
-                    }
-                }
         }
 
         Image {
@@ -124,13 +122,6 @@ Item {
                     id: revdoorOpenAnimationRightBottom
                     running: false
                     PropertyAnimation { target: rightDoorBottom; property: "rotation"; to: 0; duration: 500 }
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        doorOpenAnimationRightBottom.running = true
-                    }
                 }
         }
 
@@ -190,29 +181,247 @@ Item {
             visible: false
 
         }
-    }
 
+        Image
+        {
+            id: energyBut
+            source: "qrc:/ui/energyBut.png"
+            width: asd.width/4
+            height: asd.height/4
+            fillMode: Image.PreserveAspectFit
+            anchors.right: parent.horizontalCenter
+            anchors.rightMargin: 53
+            anchors.top: parent.verticalCenter
+            anchors.topMargin: 80
+            visible: false
 
-    Button
-    {
-        text: "Bottom"
-        width: parent.width * 0.35
-        height: parent.height * 0.15
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: -30
-        opacity: 0.5
-        onClicked: {
-            revdoorOpenAnimationRight.running = true
-            revdoorOpenAnimationLeft.running = true
-            revdoorOpenAnimationLeftBottom.running = true
-            revdoorOpenAnimationRightBottom.running = true
-            closeCapot.visible = !closeCapot.visible
-            openCapot.visible = !openCapot.visible
-            closeBag.visible = !closeBag.visible
-            openBag.visible = !openBag.visible
         }
     }
+
+    ToolButton
+    {
+        property bool isButtonClick: true
+        id: capotDoorButton
+        text: "Open capot"
+        width: parent.width * 0.2
+        height: parent.height * 0.1
+        anchors.bottom: parent.verticalCenter
+        anchors.bottomMargin: parent.height*0.35
+        anchors.right: parent.right
+        anchors.rightMargin: parent.width*0.1
+
+        hoverEnabled: true
+        onClicked: {
+            closeCapot.visible = !closeCapot.visible
+            openCapot.visible = !openCapot.visible
+            isButtonClick = !isButtonClick
+        }
+
+        background: Rectangle {
+            id: rectangleCapotDoorButton
+            color:  capotDoorButton.isButtonClick ? "lightgray" : "red"
+            radius: 15*parent.width
+            border.color : "gray"
+            border.width: 1
+        }
+    }
+
+    ToolButton
+    {
+        property bool isButtonClick: true
+        id: bagDoorButton
+        text: "Open bag"
+        width: parent.width * 0.2
+        height: parent.height * 0.1
+        anchors.top: parent.verticalCenter
+        anchors.topMargin: parent.height*0.4
+        anchors.right: parent.right
+        anchors.rightMargin: parent.width*0.1
+
+        hoverEnabled: true
+        onClicked: {
+            closeBag.visible = !closeBag.visible
+            openBag.visible = !openBag.visible
+            isButtonClick = !isButtonClick
+        }
+
+        background: Rectangle {
+            id: rectangleBagDoorButton
+            color:  bagDoorButton.isButtonClick ? "lightgray" : "red"
+            radius: 15*parent.width
+            border.color : "gray"
+            border.width: 1
+        }
+    }
+
+    ToolButton
+    {
+        property bool isButtonClick: true
+        id: energyDoorButton
+        text: "Open ePort"
+        width: parent.width * 0.2
+        height: parent.height * 0.1
+        anchors.top: parent.verticalCenter
+        anchors.topMargin: parent.height*0.4
+        anchors.left: parent.left
+        anchors.leftMargin: parent.width*0.1
+
+        hoverEnabled: true
+        onClicked: {
+            energyBut.visible = !energyBut.visible
+            isButtonClick = !isButtonClick
+        }
+
+        background: Rectangle {
+            id: rectangleEnergyDoorButton
+            color:  energyDoorButton.isButtonClick ? "lightgray" : "red"
+            radius: 15*parent.width
+            border.color : "gray"
+            border.width: 1
+        }
+    }
+
+
+
+    ToolButton
+    {
+        property bool isButtonClick: true
+        id: rightTopDoorButton
+        text: "Open door"
+        width: parent.width * 0.2
+        height: parent.height * 0.1
+        anchors.bottom: parent.verticalCenter
+        anchors.bottomMargin: parent.height*0.1
+        anchors.right: parent.right
+
+        hoverEnabled: true
+        onClicked: {
+            if(rightTopDoorCheck)
+            {
+                revdoorOpenAnimationRight.running = true
+            }
+                else
+            {
+                doorOpenAnimationRight.running = true
+            }
+            rightTopDoorCheck = !rightTopDoorCheck
+            isButtonClick = !isButtonClick
+            //revdoorOpenAnimationRight.running = true
+            //revdoorOpenAnimationLeft.running = true
+            // revdoorOpenAnimationLeftBottom.running = true
+            // revdoorOpenAnimationRightBottom.running = true
+            // closeCapot.visible = !closeCapot.visible
+            // openCapot.visible = !openCapot.visible
+            // closeBag.visible = !closeBag.visible
+            // openBag.visible = !openBag.visible
+        }
+
+        background: Rectangle {
+            id: rectangleRightTopDoorButton
+            color:  rightTopDoorButton.isButtonClick ? "lightgray" : "red"
+            radius: 15*parent.width
+            border.color : "gray"
+            border.width: 1
+        }
+    }
+
+    ToolButton
+        {
+            property bool isButtonClick: true
+            id: rightBottomDoorButton
+            text: "Open door"
+            width: parent.width * 0.2
+            height: parent.height * 0.1
+            anchors.top: parent.verticalCenter
+            anchors.topMargin: parent.height * 0.15
+            anchors.right: parent.right
+
+            onClicked: {
+                if(rightBottomDoorCheck)
+                {
+                    revdoorOpenAnimationRightBottom.running = true
+                }
+                    else
+                {
+                    doorOpenAnimationRightBottom.running = true
+                }
+                rightBottomDoorCheck = !rightBottomDoorCheck
+                isButtonClick = !isButtonClick
+            }
+
+            background: Rectangle {
+                color: rightBottomDoorButton.isButtonClick ? "lightgray" : "red"
+                radius: 15*parent.width
+                border.color : "gray"
+                border.width: 1
+            }
+        }
+
+    ToolButton
+    {
+        property bool isButtonClick: true
+        id: leftTopDoorButton
+        text: "Open door"
+        width: parent.width * 0.2
+        height: parent.height * 0.1
+        anchors.bottom: parent.verticalCenter
+        anchors.bottomMargin: parent.height*0.1
+        anchors.left: parent.left
+
+        hoverEnabled: true
+        onClicked: {
+            if(leftTopDoorCheck)
+            {
+                revdoorOpenAnimationLeft.running = true
+            }
+                else
+            {
+                doorOpenAnimationLeft.running = true
+            }
+            leftTopDoorCheck = !leftTopDoorCheck
+            isButtonClick = !isButtonClick
+        }
+
+        background: Rectangle {
+            id: rectangleLeftTopDoorButton
+            color:  leftTopDoorButton.isButtonClick ? "lightgray" : "red"
+            radius: 15*parent.width
+            border.color : "gray"
+            border.width: 1
+        }
+    }
+
+    ToolButton
+        {
+            property bool isButtonClick: true
+            id: leftBottomDoorButton
+            text: "Open door"
+            width: parent.width * 0.2
+            height: parent.height * 0.1
+            anchors.top: parent.verticalCenter
+            anchors.topMargin: parent.height * 0.15
+            anchors.left: parent.left
+
+            onClicked: {
+                if(leftBottomDoorCheck)
+                {
+                    revdoorOpenAnimationLeftBottom.running = true
+                }
+                    else
+                {
+                    doorOpenAnimationLeftBottom.running = true
+                }
+                leftBottomDoorCheck = !leftBottomDoorCheck
+                isButtonClick = !isButtonClick
+            }
+
+            background: Rectangle {
+                color: leftBottomDoorButton.isButtonClick ? "lightgray" : "red"
+                radius: 15*parent.width
+                border.color : "gray"
+                border.width: 1
+            }
+        }
 
     // Button
     // {

@@ -3,7 +3,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 
 Window {
-    minimumWidth: 1135
+    minimumWidth: 1240
     minimumHeight: 747
     visible: true
     title: qsTr("Tesla Application by VG")

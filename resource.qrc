@@ -81,5 +81,6 @@
         <file>ui/CapotOpen.png</file>
         <file>ui/CloseBag.png</file>
         <file>ui/OpenBag.png</file>
+        <file>ui/energyBut.png</file>
     </qresource>
 </RCC>
