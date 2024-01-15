@@ -82,5 +82,9 @@
         <file>ui/CloseBag.png</file>
         <file>ui/OpenBag.png</file>
         <file>ui/energyBut.png</file>
+        <file>ui/VintRed.png</file>
+        <file>ui/seatRightRedBottom.png</file>
+        <file>ui/seatRightRedMiddle.png</file>
+        <file>ui/seatRightRedTop.png</file>
     </qresource>
 </RCC>

@@ -5,6 +5,7 @@ import QtPositioning
 
 Item {
     id: appWindow
+    property string bufferText
     property string tempText: textSearch.text
     signal selectTool();
      property variant mapview
@@ -183,8 +184,44 @@ support"
 
                     onActiveFocusChanged: {
                         if (activeFocus) {
+                            bufferText = textSearch.text
                             textSearch.text = ""
                         }
+                        if(!activeFocus)
+                        {
+                            if(textSearch.text === "")
+                            {
+                                textSearch.text = bufferText
+                            }
+                        }
+                    }
+                }
+            }
+
+
+            Popup {
+                id: errorPopup
+                width: appWindow.width / 1.015
+                height: appWindow.height * 0.08
+                visible: false
+                x: ((appWindow.width - errorPopup.width) / 2)-appWindow.width*0.002
+                y:  appWindow.height * 0.71
+
+                background: Rectangle {
+                    width: errorPopup.width
+                    height: errorPopup.height
+                    color: "red"
+                    radius: 10
+                    border.color: "darkred"
+                    border.width: 2
+                    opacity: 0.8
+
+                    Text {
+                        id:errorPopupText
+                        text: "Please enter a valid address!"
+                        font.pixelSize: errorPopup.height / 2
+                        anchors.centerIn: parent
+                        color: "white"
                     }
                 }
             }
@@ -211,8 +248,21 @@ support"
                     border.width: 1
                 }
                 onClicked: {
+                    if((textSearch.text !== "") && (textSearch.text !== "Search..." ) && (textSearch.text !== " " ) && (bufferText !== textSearch.text))
+                    {
+                    bufferText = textSearch.text
                     toCoordinateText = textSearch.text
                     selectTool()
+                    }
+                    else
+                    {
+                        if(bufferText === textSearch.text)
+                            errorPopupText.text = "Enter a different address"
+                        else
+                            errorPopupText.text = "Please enter a valid address"
+
+                        errorPopup.visible = true
+                    }
                 }
             }
         }

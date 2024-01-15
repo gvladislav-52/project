@@ -9,7 +9,7 @@ Rectangle {
 
     ToolButton {
         id: ventButton
-        icon.source: "qrc:/ui/Vint.png"
+        icon.source: !ventButton.temp_ventButton ? "qrc:/ui/Vint.png" : "qrc:/ui/VintRed.png"
         anchors.verticalCenter: selectButtonFooter.verticalCenter
         anchors.horizontalCenter: selectButtonFooter.horizontalCenter
         icon.width: selectButtonFooter.width * 0.5 // Масштабирование ширины иконки
@@ -17,8 +17,28 @@ Rectangle {
         hoverEnabled: false
 
         background: Rectangle {
-            color: ventButton.pressed ? "lightgray" : "transparent"
-            radius: 10
+            color: "transparent"
+        }
+
+        property bool temp_ventButton: false
+
+        Behavior on rotation {
+            RotationAnimation {
+                duration: 1000 // Время одного оборота в мс
+            }
+        }
+
+            onClicked: {
+                ventButton.rotation = 0
+                ventButton.temp_ventButton = !ventButton.temp_ventButton
+            }
+
+        onTemp_ventButtonChanged: {
+            if (ventButton.temp_ventButton) {
+                ventButton.rotation = 360
+            } else {
+                ventButton.rotation = 0
+            }
         }
     }
 
@@ -46,7 +66,9 @@ Rectangle {
         Text {
             id: textTempLeft
             text: footer_temp_qml.left_Temparate + "°"
-            color: "white"
+            color: if (footer_temp_qml.left_Temparate === 29) "red"
+            else if (footer_temp_qml.left_Temparate === 15) "#45FFFF"
+            else "white"
             font.bold: true
             font.pixelSize: Math.min(selectButtonFooter.width, selectButtonFooter.height) * 0.25
         }
@@ -91,7 +113,9 @@ Rectangle {
         Text {
             id: textTempRight
             text: footer_temp_qml.right_Temparate + "°"
-            color: "white"
+            color: if (footer_temp_qml.right_Temparate === 29) "red"
+                    else if (footer_temp_qml.right_Temparate === 15) "#45FFFF"
+                    else "white"
             font.bold: true
             font.pixelSize: Math.min(selectButtonFooter.width, selectButtonFooter.height) * 0.25
         }
@@ -114,7 +138,13 @@ Rectangle {
 
     ToolButton {
         id: seatButtonLeft
-        icon.source: "qrc:/ui/seatLeft.png"
+        icon.source: if(temp_seatButtonLeft === 0)
+                         "qrc:/ui/seatRight.png"
+                    else if (temp_seatButtonLeft === 1)
+                         "qrc:/ui/seatRightRedBottom.png"
+                    else if (temp_seatButtonLeft === 2)
+                         "qrc:/ui/seatRightRedMiddle.png"
+                    else "qrc:/ui/seatRightRedTop.png"
         anchors.verticalCenter: selectButtonFooter.verticalCenter
         anchors.left: columnTempLeft.left
         anchors.leftMargin: -parent.width * 0.09
@@ -122,15 +152,28 @@ Rectangle {
         icon.height: selectButtonFooter.height * 0.5
         hoverEnabled: false
 
-        background: Rectangle {
-            color: seatButtonLeft.pressed ? "lightgray" : "transparent"
-            radius: 10
+        property int temp_seatButtonLeft: 0
+
+        onClicked: if(temp_seatButtonLeft < 3)
+                       temp_seatButtonLeft++;
+                    else temp_seatButtonLeft = 0
+
+        transform: Scale {
+            xScale: -1
+            origin.x: seatButtonLeft.width / 2
+            origin.y: seatButtonLeft.height / 2
         }
     }
 
     ToolButton {
         id: seatButtonRight
-        icon.source: "qrc:/ui/seatRight.png"
+        icon.source: if(temp_seatButtonRight === 0)
+                         "qrc:/ui/seatRight.png"
+                    else if (temp_seatButtonRight === 1)
+                         "qrc:/ui/seatRightRedBottom.png"
+                    else if (temp_seatButtonRight === 2)
+                         "qrc:/ui/seatRightRedMiddle.png"
+                    else "qrc:/ui/seatRightRedTop.png"
         anchors.verticalCenter: selectButtonFooter.verticalCenter
         anchors.right: columnTempRight.right
         anchors.rightMargin: -parent.width * 0.09
@@ -138,10 +181,11 @@ Rectangle {
         icon.height: selectButtonFooter.height * 0.5
         hoverEnabled: false
 
-        background: Rectangle {
-            color: seatButtonRight.pressed ? "lightgray" : "transparent"
-            radius: 10
-        }
+        property int temp_seatButtonRight: 0
+
+        onClicked: if(temp_seatButtonRight < 3)
+                       temp_seatButtonRight++;
+                    else temp_seatButtonRight = 0
     }
 
     ToolButton {
