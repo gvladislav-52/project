@@ -94,7 +94,7 @@ support"
             height: page.height
             map.center: fromCoordinate
             map.zoomLevel: (maximumZoomLevel - minimumZoomLevel)/2
-             map.onSupportedMapTypesChanged: mainMenu.mapTypeMenu.createMenu(map)
+             //map.onSupportedMapTypesChanged: mainMenu.mapTypeMenu.createMenu(map)
 
             Image {
                 id: mapSunSet
@@ -267,8 +267,6 @@ support"
             }
         }
     }
-
-
 
     MainMenu {id: mainMenu}
 }

@@ -154,6 +154,10 @@ Rectangle {
 
         property int temp_seatButtonLeft: 0
 
+        background: Rectangle {
+            color: "transparent"
+        }
+
         onClicked: if(temp_seatButtonLeft < 3)
                        temp_seatButtonLeft++;
                     else temp_seatButtonLeft = 0
@@ -182,6 +186,10 @@ Rectangle {
         hoverEnabled: false
 
         property int temp_seatButtonRight: 0
+
+        background: Rectangle {
+            color: "transparent"
+        }
 
         onClicked: if(temp_seatButtonRight < 3)
                        temp_seatButtonRight++;

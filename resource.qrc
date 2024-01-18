@@ -30,9 +30,6 @@
         <file>ui/P.png</file>
         <file>MainQML.qml</file>
         <file>MainLeftWidget.qml</file>
-        <file>LeftCharge.qml</file>
-        <file>LeftImage.qml</file>
-        <file>LeftSelect.qml</file>
         <file>ui/UP.png</file>
         <file>ui/DOWN.png</file>
         <file>ui/Vint.png</file>
@@ -53,19 +50,12 @@
         <file>ui/account.png</file>
         <file>ui/locker.png</file>
         <file>ui/soundheader.png</file>
-        <file>ItemPopupMenu.qml</file>
-        <file>MainMenu.qml</file>
         <file>MapComponent.qml</file>
-        <file>MapPopupMenu.qml</file>
         <file>MapSliders.qml</file>
-        <file>Marker.qml</file>
-        <file>MarkerPopupMenu.qml</file>
-        <file>MiniMap.qml</file>
         <file>ui/15810.png</file>
         <file>ui/sun.png</file>
         <file>ui/menu.png</file>
         <file>ui/font.ttf</file>
-        <file>MapFile.qml</file>
         <file>ui/navi.png</file>
         <file>ui/carDetails/BottomCar.png</file>
         <file>ui/carDetails/LeftBottomCar.png</file>
@@ -86,5 +76,17 @@
         <file>ui/seatRightRedBottom.png</file>
         <file>ui/seatRightRedMiddle.png</file>
         <file>ui/seatRightRedTop.png</file>
+        <file>ChargeWidget.qml</file>
+        <file>SpeedWidget.qml</file>
+        <file>MicroWidget.qml</file>
+        <file>MainMenu.qml</file>
+        <file>Dial.qml</file>
+        <file>ui/needle.png</file>
+        <file>ui/needle_shadow.png</file>
+        <file>ui/overlay.png</file>
+        <file>ui/background.png</file>
+        <file>ui/background1.png</file>
+        <file>ui/tesla_copy.png</file>
+        <file>ui/distance.png</file>
     </qresource>
 </RCC>
