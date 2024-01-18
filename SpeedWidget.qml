@@ -99,5 +99,93 @@ Rectangle {
         font.bold: true
         color: "white"
     }
+
+    Image {
+        id: image_optics
+        source: "qrc:/ui/optics/optics_1.png"
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.topMargin: parent.height * 0.05
+        anchors.leftMargin: parent.width * 0.2
+        width: parent.width * 0.07
+        height: parent.height * 0.03
+    }
+
+    Image {
+        id: image_optics_2
+        source: "qrc:/ui/optics/optics_2.png"
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.topMargin: parent.height * 0.15
+        anchors.leftMargin: parent.width * 0.1
+        width: parent.width * 0.07
+        height: parent.height * 0.03
+    }
+
+    Image {
+        id: image_optics_3
+        source: "qrc:/ui/optics/optics_3.png"
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.topMargin: parent.height * 0.25
+        anchors.leftMargin: parent.width * 0.05
+        width: parent.width * 0.07
+        height: parent.height * 0.03
+    }
+
+    Image {
+        id: image_optics_4
+        source: "qrc:/ui/optics/optics_4.png"
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.topMargin: parent.height * 0.35
+        anchors.leftMargin: parent.width * 0.05
+        width: parent.width * 0.07
+        height: parent.height * 0.03
+    }
+
+    Image {
+        id: image_optics_5
+        source: "qrc:/ui/optics/optics_5.png"
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.topMargin: parent.height * 0.05
+        anchors.rightMargin: parent.width * 0.2
+        width: parent.width * 0.07
+        height: parent.height * 0.03
+    }
+
+    Image {
+        id: image_optics_6
+        source: "qrc:/ui/optics/optics_6.png"
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.topMargin: parent.height * 0.15
+        anchors.rightMargin: parent.width * 0.1
+        width: parent.width * 0.07
+        height: parent.height * 0.03
+    }
+
+    Image {
+        id: image_optics_7
+        source: "qrc:/ui/optics/optics_7.png"
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.topMargin: parent.height * 0.25
+        anchors.rightMargin: parent.width * 0.05
+        width: parent.width * 0.07
+        height: parent.height * 0.03
+    }
+
+    Image {
+        id: image_optics_8
+        source: "qrc:/ui/optics/optics_8.png"
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.topMargin: parent.height * 0.35
+        anchors.rightMargin: parent.width * 0.05
+        width: parent.width * 0.07
+        height: parent.height * 0.03
+    }
 }
 //! [0]

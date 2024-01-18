@@ -88,5 +88,13 @@
         <file>ui/background1.png</file>
         <file>ui/tesla_copy.png</file>
         <file>ui/distance.png</file>
+        <file>ui/optics/optics_1.png</file>
+        <file>ui/optics/optics_2.png</file>
+        <file>ui/optics/optics_3.png</file>
+        <file>ui/optics/optics_4.png</file>
+        <file>ui/optics/optics_5.png</file>
+        <file>ui/optics/optics_6.png</file>
+        <file>ui/optics/optics_7.png</file>
+        <file>ui/optics/optics_8.png</file>
     </qresource>
 </RCC>
