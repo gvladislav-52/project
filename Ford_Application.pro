@@ -11,16 +11,12 @@ CONFIG += c++17
 SOURCES += \
     footer.cpp \
     headermap.cpp \
-    leftsourcefile.cpp \
-    leftsourcefile.cpp \
     main.cpp \
     rightsourcefile.cpp
 
 HEADERS += \
     footer.h \
     headermap.h \
-    leftsourcefile.h \
-    leftsourcefile.h \
     rightsourcefile.h
 
 FORMS +=
