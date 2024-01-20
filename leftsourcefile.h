@@ -1,19 +1,10 @@
 #ifndef LEFTSOURCEFILE_H
 #define LEFTSOURCEFILE_H
 
-#include <QLabel>
-#include <QObject>
-#include <QQuickWidget>
-#include <QTimer>
-#include <QVBoxLayout>
-#include <QtQuick>
-
-class LeftSourceFile : public QObject
+class leftsourcefile
 {
-    Q_OBJECT
-
 public:
-    LeftSourceFile(QObject *parent = nullptr);
+    leftsourcefile();
 };
 
 #endif // LEFTSOURCEFILE_H
